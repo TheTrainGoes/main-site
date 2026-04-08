@@ -362,7 +362,7 @@ body {
   }
 
   .puzzle-header {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.2in;
   }
 
   .puzzle-header h2 {
@@ -378,7 +378,7 @@ body {
   .ws-grid-wrapper {
     display: block;
     overflow: visible;
-    margin-bottom: 0.5in;
+    margin-bottom: 0.2in;
   }
 
   .ws-grid {
@@ -408,11 +408,11 @@ body {
 
   /* Hard: 20x20 */
   .ws-grid[data-size="20"] {
-    width: 7in;
+    width: 6.25in;
     margin: 0 auto;
   }
   .ws-grid[data-size="20"] .ws-cell {
-    font-size: 10pt;
+    font-size: 9pt;
   }
 
   .ws-cell {
