@@ -1,0 +1,445 @@
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #3b5bdb;
+  --primary-dark: #2f4ac2;
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --text: #1c1c2e;
+  --muted: #6c757d;
+  --border: #dee2e6;
+  --radius: 8px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1.25rem 0;
+  margin-bottom: 2rem;
+}
+
+.site-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.site-header p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 0.2rem;
+}
+
+/* ============================================================
+   HOME PAGE CARDS
+   ============================================================ */
+.generator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+.generator-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.generator-card:not(.coming-soon):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
+}
+
+.generator-card.coming-soon {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.card-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.generator-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   WORD SEARCH PAGE — NAVIGATION & TITLE
+   ============================================================ */
+.back-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  margin-bottom: 0.75rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.page-title {
+  margin-bottom: 1.5rem;
+}
+
+.page-title h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.page-title p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+.controls-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-group select {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  appearance: auto;
+}
+
+.form-group select:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.form-group--btn {
+  flex: 0 0 auto;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.4rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+}
+
+/* ============================================================
+   OUTPUT CARD
+   ============================================================ */
+.output-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.output-card.hidden {
+  display: none;
+}
+
+.puzzle-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.puzzle-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.puzzle-header p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   WORD SEARCH GRID
+   ============================================================ */
+.ws-grid-wrapper {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.ws-grid {
+  display: inline-grid;
+  border-top: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+  flex-shrink: 0;
+}
+
+.ws-cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 14px;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  background: #fff;
+  user-select: none;
+  color: var(--text);
+}
+
+/* ============================================================
+   WORD LIST
+   ============================================================ */
+.word-list {
+  border-top: 1px solid var(--border);
+  padding-top: 1.1rem;
+}
+
+.word-list h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.word-list-items {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.3rem 0.75rem;
+}
+
+.word-item {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+/* ============================================================
+   OUTPUT ACTIONS
+   ============================================================ */
+.output-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .output-card {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .puzzle-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .puzzle-header h2 {
+    font-size: 18pt;
+  }
+
+  .puzzle-header p {
+    font-size: 11pt;
+    color: #555;
+  }
+
+  /* Grid layout for print */
+  .ws-grid-wrapper {
+    display: block;
+    overflow: visible;
+    margin-bottom: 0.5in;
+  }
+
+  .ws-grid {
+    display: grid !important;
+    grid-template-columns: repeat(var(--cols), 1fr) !important;
+    border-top: 1pt solid #aaa;
+    border-left: 1pt solid #aaa;
+  }
+
+  /* Easy: 10x10 */
+  .ws-grid[data-size="10"] {
+    width: 5.5in;
+    margin: 0 auto;
+  }
+  .ws-grid[data-size="10"] .ws-cell {
+    font-size: 18pt;
+  }
+
+  /* Medium: 15x15 */
+  .ws-grid[data-size="15"] {
+    width: 6.5in;
+    margin: 0 auto;
+  }
+  .ws-grid[data-size="15"] .ws-cell {
+    font-size: 13pt;
+  }
+
+  /* Hard: 20x20 */
+  .ws-grid[data-size="20"] {
+    width: 7in;
+    margin: 0 auto;
+  }
+  .ws-grid[data-size="20"] .ws-cell {
+    font-size: 10pt;
+  }
+
+  .ws-cell {
+    width: auto !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    border-right: 1pt solid #aaa;
+    border-bottom: 1pt solid #aaa;
+  }
+
+  /* Word list */
+  .word-list {
+    border-top: 1pt solid #aaa;
+    padding-top: 0.2in;
+  }
+
+  .word-list h3 {
+    font-size: 9pt;
+    margin-bottom: 0.1in;
+  }
+
+  .word-list-items {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.05in 0.2in;
+  }
+
+  .word-item {
+    font-size: 10pt;
+  }
+}
