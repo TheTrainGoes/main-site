@@ -597,8 +597,8 @@ body {
     display: flex;
     justify-content: flex-end;
     font-size: 11pt;
-    margin-top: 0.2in;
-    padding-top: 0.2in;
+    margin-top: 0.25in;
+    padding-top: 0.5in;
     border-top: 1pt solid #aaa;
   }
 
