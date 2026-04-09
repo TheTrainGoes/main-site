@@ -403,7 +403,8 @@ body {
 
 /* Score line */
 .ws-score {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
   font-size: 0.95rem;
   font-weight: 600;
   margin-top: 1.25rem;
@@ -591,6 +592,8 @@ body {
   }
 
   .ws-score {
+    display: flex;
+    justify-content: flex-end;
     font-size: 11pt;
     margin-top: 0.2in;
     padding-top: 0.1in;
