@@ -385,6 +385,7 @@ body {
 .math-problems-grid {
   display: grid;
   gap: 2.5rem 2rem;
+  justify-items: start;
 }
 
 /* Individual problem */
@@ -405,8 +406,8 @@ body {
   text-align: right;
 }
 
+/* Stack is content-width only — the table drives the width */
 .mp-stack {
-  flex: 1;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
 }
@@ -416,17 +417,32 @@ body {
 .math-problems-grid.cols-2 .mp-stack { font-size: 1.55rem; }
 .math-problems-grid.cols-3 .mp-stack { font-size: 1.25rem; }
 
-.mp-top {
-  text-align: right;
-  line-height: 1.4;
+/* Table sizes to its content — underline stays tight to the numbers */
+.mp-table {
+  border-collapse: collapse;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-.mp-bot {
-  display: flex;
-  justify-content: space-between;
-  line-height: 1.4;
+.mp-op {
+  text-align: left;
+  vertical-align: bottom;
+  padding-right: 0.25em;
+  white-space: nowrap;
+}
+
+.mp-val {
+  text-align: right;
+  vertical-align: bottom;
+  white-space: nowrap;
+  padding-right: 0.35em; /* slight overhang past last digit */
+}
+
+/* Underline only on the second row */
+.mp-underline td {
   border-bottom: 2.5px solid var(--text);
-  padding-bottom: 0.1rem;
+  padding-bottom: 0.15rem;
 }
 
 .mp-answer-box {
@@ -435,6 +451,7 @@ body {
   border-radius: 3px;
   margin-top: 0.5rem;
   background: #fff;
+  width: 100%;
 }
 
 /* ============================================================
@@ -575,7 +592,7 @@ body {
     width: 0.2in;
   }
 
-  .mp-bot {
+  .mp-underline td {
     border-bottom: 1.5pt solid #000;
   }
 
@@ -584,5 +601,6 @@ body {
     border: 1pt solid #bbb;
     margin-top: 0.08in;
     border-radius: 2pt;
+    width: 100%;
   }
 }

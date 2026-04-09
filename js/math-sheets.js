@@ -113,11 +113,10 @@ function buildProblemEl(idx, problem) {
   div.innerHTML =
     `<div class="mp-num">${idx}.</div>` +
     `<div class="mp-stack">` +
-      `<div class="mp-top">${fmt(a)}</div>` +
-      `<div class="mp-bot">` +
-        `<span class="mp-sym">${sym}</span>` +
-        `<span class="mp-val">${fmt(b)}</span>` +
-      `</div>` +
+      `<table class="mp-table">` +
+        `<tr><td class="mp-op"></td><td class="mp-val">${fmt(a)}</td></tr>` +
+        `<tr class="mp-underline"><td class="mp-op">${sym}</td><td class="mp-val">${fmt(b)}</td></tr>` +
+      `</table>` +
       `<div class="mp-answer-box"></div>` +
     `</div>`;
   return div;
