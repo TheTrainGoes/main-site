@@ -479,8 +479,16 @@ body {
   flex-shrink: 0;
 }
 
-/* Answer key — hidden on screen, only prints when checkbox is checked */
-.answer-key {
+/* Highlighted solution cells on word search answer key */
+.ws-cell.solution {
+  background: #dbe4ff;
+  color: var(--primary);
+  font-weight: 900;
+}
+
+/* Answer key sections — hidden on screen, only print when checkbox is checked */
+.answer-key,
+.ws-answer-key {
   display: none;
 }
 
@@ -626,10 +634,18 @@ body {
     border-top: 1pt solid #aaa;
   }
 
-  /* Answer key second page */
-  .answer-key.show-on-print {
+  /* Answer key second page — math and word search */
+  .answer-key.show-on-print,
+  .ws-answer-key.show-on-print {
     display: block;
     page-break-before: always;
+  }
+
+  /* Word search answer key — solution cells print in a visible highlight */
+  .ws-cell.solution {
+    background: #dbe4ff !important;
+    color: #2f4ac2 !important;
+    font-weight: 900;
   }
 
   .answer-key-header {

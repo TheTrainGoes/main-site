@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word Search Generator &mdash; Kid Sheets</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
   <header class="site-header no-print">
@@ -82,8 +82,21 @@
       </div>
 
       <div class="output-actions no-print">
+        <label class="answer-key-label">
+          <input type="checkbox" id="answer-key-check"> Print answer key on second page
+        </label>
         <button id="print-btn" class="btn btn-secondary">Print / Save as PDF</button>
         <button id="regen-btn" class="btn btn-primary">Regenerate</button>
+      </div>
+    </div>
+
+    <div id="ws-answer-key" class="ws-answer-key">
+      <div class="puzzle-header">
+        <h2 id="answer-key-puzzle-title"></h2>
+        <p>Answer Key</p>
+      </div>
+      <div class="ws-grid-wrapper">
+        <div id="ws-answer-grid" class="ws-grid"></div>
       </div>
     </div>
   </main>

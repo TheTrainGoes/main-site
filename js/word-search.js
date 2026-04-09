@@ -607,6 +607,7 @@ function placeWord(grid, word, row, col, dr, dc) {
 function generateGrid(size, words) {
   const grid = Array.from({ length: size }, () => Array(size).fill(''));
   const placed = [];
+  const solutionCells = new Set(); // "row,col" strings for answer key highlighting
 
   for (const word of words) {
     // Build all possible (row, col, direction) placements and shuffle
@@ -624,6 +625,9 @@ function generateGrid(size, words) {
       if (canPlace(grid, word, r, c, dr, dc)) {
         placeWord(grid, word, r, c, dr, dc);
         placed.push(word);
+        for (let i = 0; i < word.length; i++) {
+          solutionCells.add(`${r + i * dr},${c + i * dc}`);
+        }
         break;
       }
     }
@@ -639,7 +643,7 @@ function generateGrid(size, words) {
     }
   }
 
-  return { grid, placed };
+  return { grid, placed, solutionCells };
 }
 
 // ============================================================
@@ -670,6 +674,23 @@ function renderGrid(grid, size) {
   }
 }
 
+function renderAnswerGrid(grid, size, solutionCells) {
+  const el = document.getElementById('ws-answer-grid');
+  el.style.gridTemplateColumns = `repeat(${size}, 32px)`;
+  el.style.setProperty('--cols', size);
+  el.setAttribute('data-size', size);
+  el.innerHTML = '';
+
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'ws-cell' + (solutionCells.has(`${r},${c}`) ? ' solution' : '');
+      cell.textContent = grid[r][c];
+      el.appendChild(cell);
+    }
+  }
+}
+
 function renderWordList(words) {
   const el = document.getElementById('word-list-items');
   el.innerHTML = words.map(w =>
@@ -694,14 +715,18 @@ function generate() {
   const eligible = pool.filter(w => w.length <= size && w.length <= gradeMax);
   const selected = shuffle(eligible).slice(0, wordCount);
 
-  const { grid, placed } = generateGrid(size, selected);
+  const { grid, placed, solutionCells } = generateGrid(size, selected);
+
+  const titleText = `${topic} Word Search`;
 
   // Titles
-  document.getElementById('puzzle-title').textContent = `${topic} Word Search`;
+  document.getElementById('puzzle-title').textContent = titleText;
   document.getElementById('puzzle-subtitle').textContent =
     `Find all ${placed.length} hidden words!`;
+  document.getElementById('answer-key-puzzle-title').textContent = titleText;
 
   renderGrid(grid, size);
+  renderAnswerGrid(grid, size, solutionCells);
   renderWordList(placed.slice().sort());
 
   const output = document.getElementById('output');
@@ -718,10 +743,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const regenEl    = document.getElementById('regen-btn');
   const printEl    = document.getElementById('print-btn');
 
+  const answerKeyCheck = document.getElementById('answer-key-check');
+  const answerKeyEl    = document.getElementById('ws-answer-key');
+
   populateTopics(genderEl.value);
 
   genderEl.addEventListener('change', () => populateTopics(genderEl.value));
   generateEl.addEventListener('click', generate);
   regenEl.addEventListener('click', generate);
   printEl.addEventListener('click', () => window.print());
+  answerKeyCheck.addEventListener('change', () => {
+    answerKeyEl.classList.toggle('show-on-print', answerKeyCheck.checked);
+  });
 });
