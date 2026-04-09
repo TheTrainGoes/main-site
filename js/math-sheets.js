@@ -111,13 +111,15 @@ function buildProblemEl(idx, problem) {
   const div = document.createElement('div');
   div.className = 'math-problem';
   div.innerHTML =
-    `<div class="mp-label">${idx}.</div>` +
-    `<table class="mp-table">` +
-      `<tr><td class="mp-op"></td><td class="mp-val">${fmt(a)}</td></tr>` +
-      `<tr><td class="mp-op">${sym}</td><td class="mp-val">${fmt(b)}</td></tr>` +
-    `</table>` +
-    `<div class="mp-line"></div>` +
-    `<div class="mp-space"></div>`;
+    `<div class="mp-num">${idx}.</div>` +
+    `<div class="mp-stack">` +
+      `<div class="mp-top">${fmt(a)}</div>` +
+      `<div class="mp-bot">` +
+        `<span class="mp-sym">${sym}</span>` +
+        `<span class="mp-val">${fmt(b)}</span>` +
+      `</div>` +
+      `<div class="mp-answer-box"></div>` +
+    `</div>`;
   return div;
 }
 
@@ -153,9 +155,15 @@ function generate() {
   const count = parseInt(countEl.value, 10);
   const { label } = OP_META[OPERATION];
 
+  // 10 → 1 col, 20 → 2 cols, 30 → 3 cols
+  const cols = count === 10 ? 1 : count === 20 ? 2 : 3;
+
   titleEl.textContent = `${GRADE_LABELS[grade]} ${label} Practice`;
 
   gridEl.innerHTML = '';
+  gridEl.className = `math-problems-grid cols-${cols}`;
+  gridEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
   for (let i = 1; i <= count; i++) {
     gridEl.appendChild(buildProblemEl(i, makeProblem(grade)));
   }

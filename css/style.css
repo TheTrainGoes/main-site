@@ -381,55 +381,60 @@ body {
   border-bottom: 1.5px solid var(--text);
 }
 
+/* Problem grid — column count set dynamically in JS */
 .math-problems-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem 1.5rem;
+  gap: 2.5rem 2rem;
 }
 
+/* Individual problem */
 .math-problem {
-  position: relative;
-  padding-left: 1.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
-.mp-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 0.7rem;
+.mp-num {
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--muted);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1;
+  padding-top: 0.35rem;
+  flex-shrink: 0;
+  width: 1.6rem;
+  text-align: right;
 }
 
-.mp-table {
+.mp-stack {
+  flex: 1;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
-  font-size: 1.3rem;
-  border-collapse: collapse;
-  width: 100%;
 }
 
-.mp-op {
-  width: 1.2em;
-  text-align: left;
-  vertical-align: bottom;
-  padding-right: 0.15rem;
-}
+/* Font size scales with column count */
+.math-problems-grid.cols-1 .mp-stack { font-size: 1.9rem; }
+.math-problems-grid.cols-2 .mp-stack { font-size: 1.55rem; }
+.math-problems-grid.cols-3 .mp-stack { font-size: 1.25rem; }
 
-.mp-val {
+.mp-top {
   text-align: right;
-  vertical-align: bottom;
+  line-height: 1.4;
 }
 
-.mp-line {
-  border-top: 2px solid var(--text);
-  margin: 0.25rem 0 0;
+.mp-bot {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.4;
+  border-bottom: 2.5px solid var(--text);
+  padding-bottom: 0.1rem;
 }
 
-.mp-space {
-  height: 1.5rem;
+.mp-answer-box {
+  height: 2rem;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  background: #fff;
 }
 
 /* ============================================================
@@ -540,8 +545,8 @@ body {
 
   /* Math worksheet print */
   .math-worksheet-header {
-    margin-bottom: 0.25in;
-    gap: 2in;
+    margin-bottom: 0.2in;
+    gap: 1.5in;
   }
 
   .math-ws-field {
@@ -554,23 +559,30 @@ body {
   }
 
   .math-problems-grid {
-    gap: 0.3in 0.15in;
+    gap: 0.25in 0.2in;
   }
 
-  .mp-table {
-    font-size: 14pt;
+  /* Keep font consistent for print so all 10 rows fit on one page */
+  .math-problems-grid.cols-1 .mp-stack,
+  .math-problems-grid.cols-2 .mp-stack,
+  .math-problems-grid.cols-3 .mp-stack {
+    font-size: 13pt;
   }
 
-  .mp-label {
+  .mp-num {
     font-size: 7pt;
-    color: #888;
+    padding-top: 0.05in;
+    width: 0.2in;
   }
 
-  .mp-line {
-    border-top: 1.5pt solid #000;
+  .mp-bot {
+    border-bottom: 1.5pt solid #000;
   }
 
-  .mp-space {
-    height: 0.3in;
+  .mp-answer-box {
+    height: 0.28in;
+    border: 1pt solid #bbb;
+    margin-top: 0.08in;
+    border-radius: 2pt;
   }
 }
