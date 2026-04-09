@@ -108,18 +108,26 @@ function buildProblemEl(idx, problem) {
   const { a, b } = problem;
   const sym = OP_META[OPERATION].symbol;
 
-  const div = document.createElement('div');
-  div.className = 'math-problem';
-  div.innerHTML =
-    `<div class="mp-num">${idx}.</div>` +
-    `<div class="mp-stack">` +
-      `<table class="mp-table">` +
-        `<tr><td class="mp-op"></td><td class="mp-val">${fmt(a)}</td></tr>` +
-        `<tr class="mp-underline"><td class="mp-op">${sym}</td><td class="mp-val">${fmt(b)}</td></tr>` +
-      `</table>` +
-      `<div class="mp-answer-box"></div>` +
-    `</div>`;
-  return div;
+  // The whole problem is a table so it naturally sizes to content width.
+  // The underline and answer box inherit that exact width.
+  const tbl = document.createElement('table');
+  tbl.className = 'math-problem';
+  tbl.innerHTML =
+    `<tr>` +
+      `<td class="mp-num" rowspan="3">${idx}.</td>` +
+      `<td class="mp-op"></td>` +
+      `<td class="mp-val">${fmt(a)}</td>` +
+    `</tr>` +
+    `<tr class="mp-underline">` +
+      `<td class="mp-op">${sym}</td>` +
+      `<td class="mp-val">${fmt(b)}</td>` +
+    `</tr>` +
+    `<tr>` +
+      `<td colspan="2" class="mp-answer-cell">` +
+        `<div class="mp-answer-box"></div>` +
+      `</td>` +
+    `</tr>`;
+  return tbl;
 }
 
 // ============================================================

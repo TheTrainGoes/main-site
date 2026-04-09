@@ -388,70 +388,64 @@ body {
   justify-items: start;
 }
 
-/* Individual problem */
+/* Each problem IS a table — tables size to content by default,
+   so the underline and answer box are never wider than the numbers */
 .math-problem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
-.mp-num {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--muted);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  padding-top: 0.35rem;
-  flex-shrink: 0;
-  width: 1.6rem;
-  text-align: right;
-}
-
-/* Stack is content-width only — the table drives the width */
-.mp-stack {
+  border-collapse: collapse;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
 }
 
 /* Font size scales with column count */
-.math-problems-grid.cols-1 .mp-stack { font-size: 1.9rem; }
-.math-problems-grid.cols-2 .mp-stack { font-size: 1.55rem; }
-.math-problems-grid.cols-3 .mp-stack { font-size: 1.25rem; }
+.math-problems-grid.cols-1 .math-problem { font-size: 1.9rem; }
+.math-problems-grid.cols-2 .math-problem { font-size: 1.55rem; }
+.math-problems-grid.cols-3 .math-problem { font-size: 1.25rem; }
 
-/* Table sizes to its content — underline stays tight to the numbers */
-.mp-table {
-  border-collapse: collapse;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-.mp-op {
-  text-align: left;
-  vertical-align: bottom;
-  padding-right: 0.25em;
+/* Problem number column */
+.mp-num {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  vertical-align: top;
+  padding-right: 0.4rem;
+  padding-top: 0.1em;
   white-space: nowrap;
 }
 
+/* Operator column */
+.mp-op {
+  text-align: left;
+  vertical-align: bottom;
+  padding-right: 0.2em;
+  white-space: nowrap;
+}
+
+/* Number column */
 .mp-val {
   text-align: right;
   vertical-align: bottom;
   white-space: nowrap;
-  padding-right: 0.35em; /* slight overhang past last digit */
+  padding-right: 0.3em;
 }
 
-/* Underline only on the second row */
-.mp-underline td {
+/* Underline on the operator row cells only */
+.mp-underline td.mp-op,
+.mp-underline td.mp-val {
   border-bottom: 2.5px solid var(--text);
   padding-bottom: 0.15rem;
+}
+
+/* Answer box row */
+.mp-answer-cell {
+  padding-top: 0.4rem;
 }
 
 .mp-answer-box {
   height: 2rem;
   border: 1.5px solid var(--border);
   border-radius: 3px;
-  margin-top: 0.5rem;
   background: #fff;
-  width: 100%;
 }
 
 /* ============================================================
@@ -580,27 +574,29 @@ body {
   }
 
   /* Keep font consistent for print so all 10 rows fit on one page */
-  .math-problems-grid.cols-1 .mp-stack,
-  .math-problems-grid.cols-2 .mp-stack,
-  .math-problems-grid.cols-3 .mp-stack {
+  .math-problems-grid.cols-1 .math-problem,
+  .math-problems-grid.cols-2 .math-problem,
+  .math-problems-grid.cols-3 .math-problem {
     font-size: 13pt;
   }
 
   .mp-num {
     font-size: 7pt;
     padding-top: 0.05in;
-    width: 0.2in;
   }
 
-  .mp-underline td {
+  .mp-underline td.mp-op,
+  .mp-underline td.mp-val {
     border-bottom: 1.5pt solid #000;
+  }
+
+  .mp-answer-cell {
+    padding-top: 0.08in;
   }
 
   .mp-answer-box {
     height: 0.28in;
     border: 1pt solid #bbb;
-    margin-top: 0.08in;
     border-radius: 2pt;
-    width: 100%;
   }
 }
