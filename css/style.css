@@ -115,6 +115,25 @@ body {
 }
 
 /* ============================================================
+   HOME PAGE SECTION LABELS
+   ============================================================ */
+.grid-section-label {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  margin-top: 0.5rem;
+}
+
+.grid-section-label:first-child {
+  margin-top: 0;
+}
+
+/* ============================================================
    WORD SEARCH PAGE — NAVIGATION & TITLE
    ============================================================ */
 .back-link {
@@ -338,6 +357,80 @@ body {
 }
 
 /* ============================================================
+   MATH WORKSHEET
+   ============================================================ */
+.math-worksheet-header {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.math-ws-field {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.math-ws-line {
+  display: inline-block;
+  width: 10rem;
+  border-bottom: 1.5px solid var(--text);
+}
+
+.math-problems-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem 1.5rem;
+}
+
+.math-problem {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.mp-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1;
+}
+
+.mp-table {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 1.3rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mp-op {
+  width: 1.2em;
+  text-align: left;
+  vertical-align: bottom;
+  padding-right: 0.15rem;
+}
+
+.mp-val {
+  text-align: right;
+  vertical-align: bottom;
+}
+
+.mp-line {
+  border-top: 2px solid var(--text);
+  margin: 0.25rem 0 0;
+}
+
+.mp-space {
+  height: 1.5rem;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -441,5 +534,41 @@ body {
 
   .word-item {
     font-size: 10pt;
+  }
+
+  /* Math worksheet print */
+  .math-worksheet-header {
+    margin-bottom: 0.25in;
+    gap: 2in;
+  }
+
+  .math-ws-field {
+    font-size: 11pt;
+  }
+
+  .math-ws-line {
+    width: 2in;
+    border-bottom: 1pt solid #000;
+  }
+
+  .math-problems-grid {
+    gap: 0.3in 0.15in;
+  }
+
+  .mp-table {
+    font-size: 14pt;
+  }
+
+  .mp-label {
+    font-size: 7pt;
+    color: #888;
+  }
+
+  .mp-line {
+    border-top: 1.5pt solid #000;
+  }
+
+  .mp-space {
+    height: 0.3in;
   }
 }
