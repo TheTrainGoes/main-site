@@ -364,7 +364,8 @@ body {
 .math-worksheet-header {
   display: flex;
   gap: 3rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .math-ws-field {
@@ -408,7 +409,7 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   margin-top: 1.25rem;
-  padding-top: 0.75rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
 
@@ -567,7 +568,8 @@ body {
 
   /* Math worksheet print */
   .math-worksheet-header {
-    margin-bottom: 0.2in;
+    margin-top: 0.15in;
+    margin-bottom: 0.3in;
     gap: 1.5in;
   }
 
@@ -596,7 +598,7 @@ body {
     justify-content: flex-end;
     font-size: 11pt;
     margin-top: 0.2in;
-    padding-top: 0.1in;
+    padding-top: 0.2in;
     border-top: 1pt solid #aaa;
   }
 
