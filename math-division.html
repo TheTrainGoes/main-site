@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Division Worksheets &mdash; Kid Sheets</title>
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
   <header class="site-header no-print">
@@ -62,13 +62,24 @@
       <div class="ws-score">Total: _____ / <span id="ws-total"></span></div>
 
       <div class="output-actions no-print">
+        <label class="answer-key-label">
+          <input type="checkbox" id="answer-key-check"> Print answer key on second page
+        </label>
         <button id="print-btn" class="btn btn-secondary">Print / Save as PDF</button>
         <button id="regen-btn" class="btn btn-primary">Regenerate</button>
       </div>
     </div>
+
+    <div id="answer-key" class="answer-key">
+      <div class="answer-key-header">
+        <h2 id="answer-key-title"></h2>
+        <p>Answer Key</p>
+      </div>
+      <div id="answer-grid" class="answer-grid"></div>
+    </div>
   </main>
 
   <script>window.MATH_OPERATION = 'division';</script>
-  <script src="js/math-sheets.js?v=3"></script>
+  <script src="js/math-sheets.js?v=4"></script>
 </body>
 </html>

@@ -134,14 +134,27 @@ function buildProblemEl(idx, problem) {
 // UI
 // ============================================================
 
-const gradeEl  = document.getElementById('grade');
-const countEl  = document.getElementById('count');
-const genBtn   = document.getElementById('generate-btn');
-const outputEl = document.getElementById('output');
-const gridEl   = document.getElementById('problems-grid');
-const titleEl  = document.getElementById('worksheet-title');
-const printBtn = document.getElementById('print-btn');
-const regenBtn = document.getElementById('regen-btn');
+const gradeEl        = document.getElementById('grade');
+const countEl        = document.getElementById('count');
+const genBtn         = document.getElementById('generate-btn');
+const outputEl       = document.getElementById('output');
+const gridEl         = document.getElementById('problems-grid');
+const titleEl        = document.getElementById('worksheet-title');
+const printBtn       = document.getElementById('print-btn');
+const regenBtn       = document.getElementById('regen-btn');
+const answerKeyEl    = document.getElementById('answer-key');
+const answerGridEl   = document.getElementById('answer-grid');
+const answerTitleEl  = document.getElementById('answer-key-title');
+const answerKeyCheck = document.getElementById('answer-key-check');
+
+function getAnswer(a, b) {
+  switch (OPERATION) {
+    case 'addition':       return a + b;
+    case 'subtraction':    return a - b;
+    case 'multiplication': return a * b;
+    case 'division':       return a / b;
+  }
+}
 
 function populateGrades() {
   const valid = VALID_GRADES[OPERATION];
@@ -164,15 +177,24 @@ function generate() {
 
   // 10 → 2 cols (5 rows), 20 → 4 cols (5 rows), 30 → 5 cols (6 rows)
   const cols = count === 10 ? 2 : count === 20 ? 4 : 5;
+  const titleText = `${GRADE_LABELS[grade]} ${label} Practice`;
 
-  titleEl.textContent = `${GRADE_LABELS[grade]} ${label} Practice`;
+  titleEl.textContent = titleText;
+  answerTitleEl.textContent = titleText;
 
   gridEl.innerHTML = '';
   gridEl.className = `math-problems-grid cols-${cols}`;
   gridEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  answerGridEl.innerHTML = '';
 
   for (let i = 1; i <= count; i++) {
-    gridEl.appendChild(buildProblemEl(i, makeProblem(grade)));
+    const problem = makeProblem(grade);
+    gridEl.appendChild(buildProblemEl(i, problem));
+
+    const item = document.createElement('div');
+    item.className = 'answer-item';
+    item.textContent = `${i}. ${fmt(getAnswer(problem.a, problem.b))}`;
+    answerGridEl.appendChild(item);
   }
 
   document.getElementById('ws-total').textContent = count;
@@ -185,3 +207,6 @@ populateGrades();
 genBtn.addEventListener('click', generate);
 regenBtn.addEventListener('click', generate);
 printBtn.addEventListener('click', () => window.print());
+answerKeyCheck.addEventListener('change', () => {
+  answerKeyEl.classList.toggle('show-on-print', answerKeyCheck.checked);
+});
