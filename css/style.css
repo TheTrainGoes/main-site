@@ -397,9 +397,19 @@ body {
 }
 
 /* Font size scales with column count */
-.math-problems-grid.cols-1 .math-problem { font-size: 1.9rem; }
-.math-problems-grid.cols-2 .math-problem { font-size: 1.55rem; }
-.math-problems-grid.cols-3 .math-problem { font-size: 1.25rem; }
+.math-problems-grid.cols-2 .math-problem { font-size: 1.6rem; }
+.math-problems-grid.cols-4 .math-problem { font-size: 1.25rem; }
+.math-problems-grid.cols-5 .math-problem { font-size: 1.05rem; }
+
+/* Score line */
+.ws-score {
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
 
 /* Problem number column */
 .mp-num {
@@ -573,11 +583,18 @@ body {
     gap: 0.25in 0.2in;
   }
 
-  /* Keep font consistent for print so all 10 rows fit on one page */
-  .math-problems-grid.cols-1 .math-problem,
+  /* Consistent font size on print — 5–6 rows fits on one page */
   .math-problems-grid.cols-2 .math-problem,
-  .math-problems-grid.cols-3 .math-problem {
+  .math-problems-grid.cols-4 .math-problem,
+  .math-problems-grid.cols-5 .math-problem {
     font-size: 13pt;
+  }
+
+  .ws-score {
+    font-size: 11pt;
+    margin-top: 0.2in;
+    padding-top: 0.1in;
+    border-top: 1pt solid #aaa;
   }
 
   .mp-num {

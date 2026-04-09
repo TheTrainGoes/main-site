@@ -162,8 +162,8 @@ function generate() {
   const count = parseInt(countEl.value, 10);
   const { label } = OP_META[OPERATION];
 
-  // 10 → 1 col, 20 → 2 cols, 30 → 3 cols
-  const cols = count === 10 ? 1 : count === 20 ? 2 : 3;
+  // 10 → 2 cols (5 rows), 20 → 4 cols (5 rows), 30 → 5 cols (6 rows)
+  const cols = count === 10 ? 2 : count === 20 ? 4 : 5;
 
   titleEl.textContent = `${GRADE_LABELS[grade]} ${label} Practice`;
 
@@ -174,6 +174,8 @@ function generate() {
   for (let i = 1; i <= count; i++) {
     gridEl.appendChild(buildProblemEl(i, makeProblem(grade)));
   }
+
+  document.getElementById('ws-total').textContent = count;
 
   outputEl.classList.remove('hidden');
   outputEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
