@@ -549,9 +549,19 @@ const WORD_LISTS = {
 // DIFFICULTY CONFIG
 // ============================================================
 const DIFFICULTY = {
-  easy:   { size: 10, wordCount: 10 },
+  small:  { size: 10, wordCount: 10 },
   medium: { size: 15, wordCount: 15 },
-  hard:   { size: 20, wordCount: 20 }
+  large:  { size: 20, wordCount: 20 }
+};
+
+// ============================================================
+// GRADE CONFIG — max word length per grade
+// ============================================================
+const GRADE_MAX_LENGTH = {
+  kindergarten: 5,
+  grade1:       7,
+  grade2:       9,
+  grade3:       Infinity
 };
 
 // ============================================================
@@ -673,13 +683,15 @@ function renderWordList(words) {
 function generate() {
   const diffKey  = document.getElementById('difficulty').value;
   const gender   = document.getElementById('gender').value;
+  const grade    = document.getElementById('grade').value;
   const topic    = document.getElementById('topic').value;
 
   const { size, wordCount } = DIFFICULTY[diffKey];
+  const gradeMax = GRADE_MAX_LENGTH[grade];
   const pool = WORD_LISTS[gender][topic];
 
-  // Filter to words that fit in the grid, then randomly pick wordCount of them
-  const eligible = pool.filter(w => w.length <= size);
+  // Filter to words that fit in the grid and are appropriate for the grade
+  const eligible = pool.filter(w => w.length <= size && w.length <= gradeMax);
   const selected = shuffle(eligible).slice(0, wordCount);
 
   const { grid, placed } = generateGrid(size, selected);
