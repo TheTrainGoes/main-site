@@ -63,7 +63,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.25rem;
-  padding-bottom: 3rem;
 }
 
 .generator-card {
@@ -115,10 +114,17 @@ body {
 }
 
 /* ============================================================
-   HOME PAGE SECTION LABELS
+   HOME PAGE SECTIONS
    ============================================================ */
-.grid-section-label {
-  grid-column: 1 / -1;
+.sheet-section {
+  margin-bottom: 2rem;
+}
+
+.sheet-section:last-child {
+  margin-bottom: 3rem;
+}
+
+.section-title {
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -126,11 +132,7 @@ body {
   color: var(--muted);
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--border);
-  margin-top: 0.5rem;
-}
-
-.grid-section-label:first-child {
-  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 /* ============================================================
