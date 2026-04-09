@@ -639,13 +639,16 @@ body {
   .ws-answer-key.show-on-print {
     display: block;
     page-break-before: always;
+    break-before: page;
   }
 
-  /* Word search answer key — solution cells print in a visible highlight */
+  /* Word search answer key — force background color to print */
   .ws-cell.solution {
     background: #dbe4ff !important;
     color: #2f4ac2 !important;
     font-weight: 900;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .answer-key-header {
