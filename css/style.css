@@ -493,6 +493,56 @@ body {
 }
 
 /* ============================================================
+   SUDOKU
+   ============================================================ */
+.sudoku-grid-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.sudoku-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(9, 48px);
+  border: 3px solid #222;
+}
+
+.sudoku-cell {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 18px;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  background: #fff;
+  color: var(--text);
+  user-select: none;
+}
+
+/* Thick borders between 3x3 boxes */
+.sudoku-cell.box-right  { border-right:  3px solid #222; }
+.sudoku-cell.box-bottom { border-bottom: 3px solid #222; }
+
+/* Given clue cells */
+.sudoku-cell.given {
+  color: var(--text);
+}
+
+/* Answer key filled cells */
+.sudoku-cell.answer {
+  color: var(--primary);
+}
+
+.sudoku-answer-key {
+  display: none;
+}
+
+/* ============================================================
    MAZE
    ============================================================ */
 .maze-wrapper {
@@ -665,6 +715,42 @@ body {
     background: #dbe4ff !important;
     color: #2f4ac2 !important;
     font-weight: 900;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Sudoku */
+  .sudoku-answer-key.show-on-print {
+    display: block;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .sudoku-grid-wrapper {
+    display: block;
+    overflow: visible;
+    margin-bottom: 0.2in;
+  }
+
+  .sudoku-grid {
+    grid-template-columns: repeat(9, 0.64in);
+    border: 2.5pt solid #000;
+    margin: 0 auto;
+  }
+
+  .sudoku-cell {
+    width: 0.64in;
+    height: 0.64in;
+    font-size: 14pt;
+    border-right: 0.75pt solid #aaa;
+    border-bottom: 0.75pt solid #aaa;
+  }
+
+  .sudoku-cell.box-right  { border-right:  2.5pt solid #000; }
+  .sudoku-cell.box-bottom { border-bottom: 2.5pt solid #000; }
+
+  .sudoku-cell.answer {
+    color: #2f4ac2 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
