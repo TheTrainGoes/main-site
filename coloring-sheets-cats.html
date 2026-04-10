@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cats Coloring Sheets &mdash; Kid Sheets</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container">
+      <h1>Kid Sheets</h1>
+      <p>Free printable activity sheets for kids</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title no-print">
+      <a href="index.html" class="back-link">&larr; Home</a>
+      <h1>Cats Coloring Sheets</h1>
+      <p id="sheet-subtitle">Printable cat coloring pages &mdash; click any sheet to preview, download, or print.</p>
+    </div>
+
+    <div class="controls-card no-print">
+      <div class="form-row">
+        <div class="form-group cs-count-group">
+          <label for="random-count">Random sheets</label>
+          <input type="number" id="random-count" class="cs-number-input" min="1" value="3">
+        </div>
+        <div class="form-group form-group--btn">
+          <button class="btn btn-secondary" id="btn-random-pdf">Download Random PDF</button>
+        </div>
+        <div class="form-group form-group--btn">
+          <button class="btn btn-primary" id="btn-all-pdf">Download All as PDF</button>
+        </div>
+        <div class="form-group form-group--btn">
+          <button class="btn btn-secondary" id="btn-print-all">Print All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-thumbnail-grid" id="thumbnail-grid"></div>
+  </main>
+
+  <!-- Modal -->
+  <div class="cs-modal hidden" id="cs-modal" role="dialog" aria-modal="true" aria-label="Coloring sheet preview">
+    <div class="cs-modal-backdrop" id="modal-backdrop"></div>
+    <div class="cs-modal-inner">
+      <button class="cs-modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <img class="cs-modal-img" id="modal-img" src="" alt="Coloring sheet preview">
+      <div class="cs-modal-actions">
+        <button class="btn btn-primary" id="btn-download-single">Download PDF</button>
+        <button class="btn btn-secondary" id="btn-print-single">Print</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/coloring-sheets-cats.js"></script>
+</body>
+</html>
