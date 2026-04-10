@@ -561,6 +561,236 @@ body {
 }
 
 /* ============================================================
+   LANGUAGE WORKSHEETS
+   ============================================================ */
+
+/* Two-column problem grid (missing letters, unscramble) */
+.lang-problems-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem 3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Single problem row */
+.lang-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.lang-num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Monospace word display (with letter spacing for blanks) */
+.lang-word {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.lang-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+  padding: 0 0.15rem;
+}
+
+/* Write-in answer underline */
+.lang-answer-line {
+  flex: 1;
+  border-bottom: 1.5px solid var(--text);
+  min-width: 5rem;
+}
+
+/* Inline blank underline inside a sentence */
+.lang-blank-line {
+  display: inline-block;
+  border-bottom: 1.5px solid var(--text);
+  min-width: 7rem;
+  margin: 0 0.2rem;
+  vertical-align: bottom;
+}
+
+/* Score line */
+.lang-score {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Answer key items (used across all activities) */
+.lang-answer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3rem 1rem;
+}
+
+.lang-answer-item {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* ── Word bank (fill in the blank) ── */
+.lang-word-bank {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg);
+}
+
+.lang-word-bank-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.lang-bank-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+}
+
+.lang-bank-word {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Sentence list */
+.lang-sentence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.lang-sentence-item {
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* ── ABC Order ── */
+.lang-abc-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.lang-abc-group-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.lang-abc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lang-abc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lang-abc-box {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.lang-abc-word {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ── Synonyms & Antonyms matching ── */
+.lang-match-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 3rem;
+  margin-bottom: 0.4rem;
+}
+
+.lang-match-col-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.lang-match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1rem 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.lang-match-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted var(--border);
+}
+
+.lang-match-key {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 1.25rem;
+  flex-shrink: 0;
+}
+
+.lang-match-word {
+  font-size: 0.95rem;
+  font-weight: 600;
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.lang-match-blank {
+  display: inline-block;
+  width: 1.75rem;
+  border-bottom: 1.5px solid var(--text);
+  flex-shrink: 0;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -772,6 +1002,45 @@ body {
   .maze-svg[data-size="15"] { width: 6.0in; height: 6.0in; }
   .maze-svg[data-size="20"] { width: 6.25in; height: 6.25in; }
   .maze-svg[data-size="200"] { width: 7in; height: 7in; }
+
+  /* Language worksheet print styles */
+  .lang-problems-grid { gap: 0.28in 0.5in; }
+  .lang-word          { font-size: 11pt; }
+  .lang-answer-line   { border-bottom: 1pt solid #000; }
+  .lang-blank-line    { border-bottom: 1pt solid #000; min-width: 1.2in; }
+  .lang-score         { padding-top: 0.4in; border-top: 1pt solid #aaa; font-size: 10pt; }
+
+  .lang-answer-grid   { grid-template-columns: repeat(4, 1fr); gap: 0.12in 0.2in; }
+  .lang-answer-item   { font-size: 10pt; }
+
+  .lang-word-bank     { background: #f4f4f4 !important; border: 1pt solid #aaa; padding: 0.1in 0.15in; margin-bottom: 0.18in; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .lang-word-bank-title { font-size: 8pt; }
+  .lang-bank-word     { font-size: 10pt; }
+
+  .lang-sentence-list { gap: 0.08in; margin-bottom: 0.15in; }
+  .lang-sentence-item { font-size: 11pt; line-height: 1.9; }
+
+  .lang-abc-container { gap: 0.1in 0.6in; margin-bottom: 0.15in; }
+  .lang-abc-group-title { font-size: 8pt; }
+  .lang-abc-list      { gap: 0.1in; }
+  .lang-abc-item      { gap: 0.15in; }
+  .lang-abc-box       { width: 0.22in; height: 0.22in; border: 1pt solid #000; font-size: 9pt; }
+  .lang-abc-word      { font-size: 11pt; }
+
+  .lang-match-header  { gap: 0 0.5in; margin-bottom: 0.05in; }
+  .lang-match-col-label { font-size: 8pt; border-bottom: 1pt solid #aaa; }
+  .lang-match-grid    { gap: 0 0.5in; margin-bottom: 0.15in; }
+  .lang-match-item    { padding: 0.06in 0; border-bottom: 0.5pt dotted #bbb; font-size: 11pt; }
+  .lang-match-key     { font-size: 8pt; }
+  .lang-match-word    { font-size: 11pt; }
+  .lang-match-blank   { width: 0.22in; border-bottom: 1pt solid #000; }
+
+  /* Answer key second page — language sheets */
+  .answer-key.show-on-print {
+    display: block;
+    page-break-before: always;
+    break-before: page;
+  }
 
   .answer-key-header {
     text-align: center;

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABC Order &mdash; Kid Sheets</title>
+  <link rel="stylesheet" href="css/style.css?v=10">
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container">
+      <h1>Kid Sheets</h1>
+      <p>Free printable activity sheets for kids</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="no-print">
+      <a href="index.html" class="back-link">&larr; Back to Home</a>
+      <div class="page-title">
+        <h1>ABC Order</h1>
+        <p>Number the words in alphabetical order from 1 to 10.</p>
+      </div>
+    </div>
+
+    <div class="controls-card no-print">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="grade">Grade</label>
+          <select id="grade"></select>
+        </div>
+        <div class="form-group form-group--btn">
+          <button id="generate-btn" class="btn btn-primary">Generate</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="output" class="output-card hidden">
+      <div class="puzzle-header">
+        <h2 id="worksheet-title"></h2>
+        <p>Write 1, 2, 3 &hellip; in the box next to each word to put the group in alphabetical order.</p>
+      </div>
+
+      <div class="math-worksheet-header">
+        <div class="math-ws-field">Name: <span class="math-ws-line"></span></div>
+        <div class="math-ws-field">Date: <span class="math-ws-line"></span></div>
+      </div>
+
+      <div id="abc-container" class="lang-abc-container"></div>
+
+      <div class="lang-score">Score: _____ / 20</div>
+
+      <div class="output-actions no-print">
+        <label class="answer-key-label">
+          <input type="checkbox" id="answer-key-check"> Print answer key on second page
+        </label>
+        <button id="print-btn" class="btn btn-secondary">Print / Save as PDF</button>
+        <button id="regen-btn" class="btn btn-primary">Regenerate</button>
+      </div>
+    </div>
+
+    <div id="answer-key" class="answer-key">
+      <div class="puzzle-header">
+        <h2 id="answer-key-title"></h2>
+        <p>Answer Key</p>
+      </div>
+      <div id="answer-container" class="lang-abc-container"></div>
+    </div>
+  </main>
+
+  <script src="js/lang-data.js"></script>
+  <script src="js/lang-abc-order.js"></script>
+</body>
+</html>
