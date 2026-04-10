@@ -94,8 +94,8 @@ function solveMaze(walls, rows, cols) {
 // Build an SVG string for the maze.
 // solution: ordered [[r,c], ...] array, or null for no solution overlay.
 function buildSVG(walls, rows, cols, solution) {
-  const cs = rows <= 10 ? 42 : rows <= 15 ? 32 : 26; // cell size px
-  const sw = 2;   // wall stroke width
+  const cs = rows > 20 ? 3 : rows <= 10 ? 42 : rows <= 15 ? 32 : 26; // cell size px
+  const sw = rows > 20 ? 1 : 2;   // wall stroke width
   const o  = sw / 2; // offset so strokes don't clip at edges
   const W  = cols * cs + sw;
   const H  = rows * cs + sw;
@@ -111,7 +111,7 @@ function buildSVG(walls, rows, cols, solution) {
       ...solution.map(([r, c]) => `${o + c * cs + cs / 2},${o + r * cs + cs / 2}`),
       `${o + (cols - 1) * cs + cs / 2},${H - o}`
     ].join(' ');
-    const pathW = Math.max(2, cs * 0.28);
+    const pathW = rows > 20 ? 1.5 : Math.max(2, cs * 0.28);
     parts.push(`<polyline points="${pts}" stroke="#e03131" stroke-width="${pathW}" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.55"/>`);
   }
 
@@ -160,7 +160,7 @@ function render() {
   state.walls    = generateMaze(n, n);
   state.solution = solveMaze(state.walls, n, n);
 
-  const label = n === 10 ? 'Small \u2014 10\xd710' : n === 15 ? 'Medium \u2014 15\xd715' : 'Large \u2014 20\xd720';
+  const label = n === 10 ? 'Small \u2014 10\xd710' : n === 15 ? 'Medium \u2014 15\xd715' : n === 20 ? 'Large \u2014 20\xd720' : 'Ultra Hard \u2014 200\xd7200';
   document.getElementById('maze-subtitle').textContent = label;
 
   document.getElementById('maze-wrapper').innerHTML        = buildSVG(state.walls, n, n, null);
