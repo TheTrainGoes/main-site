@@ -791,6 +791,70 @@ body {
 }
 
 /* ============================================================
+   COLORING SHEETS — CATEGORY HUB
+   ============================================================ */
+.cs-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.cs-category-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+}
+
+.cs-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
+}
+
+.cs-category-thumb-wrap {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.cs-category-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.cs-category-card:hover .cs-category-thumb {
+  transform: scale(1.04);
+}
+
+.cs-category-label {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--border);
+}
+
+.cs-category-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cs-category-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ============================================================
    COLORING SHEETS — THUMBNAIL GRID
    ============================================================ */
 .cs-thumbnail-grid {

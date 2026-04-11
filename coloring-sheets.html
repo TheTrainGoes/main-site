@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coloring Sheets &mdash; Kid Sheets</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Kid Sheets</h1>
+      <p>Free printable activity sheets for kids</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title">
+      <a href="index.html" class="back-link">&larr; Home</a>
+      <h1>Coloring Sheets</h1>
+      <p>Choose a category to browse and print.</p>
+    </div>
+
+    <div class="cs-category-grid" id="category-grid">
+      <a href="coloring-sheets-cats.html" class="cs-category-card" id="card-cats">
+        <div class="cs-category-thumb-wrap">
+          <img class="cs-category-thumb" id="thumb-cats" src="" alt="Cats coloring sheets">
+        </div>
+        <div class="cs-category-label">
+          <span class="cs-category-name">Cats</span>
+          <span class="cs-category-count">69 sheets</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Pick a random cat thumbnail on each page load
+    const CAT_FOLDER = 'coloring sheets/cats/';
+    const CAT_SHEETS = [
+      'Cat-with-Shirt-and-Bowtie-Riding-a-Bicycle-Coloring-Sheet',
+      'Big-Cat-Sitting-On-The-Grass',
+      'Realistic-Cat-Walking-on-a-Rooftop-with-Blossoming-Trees-Coloring-Page',
+      'Ferocious-Meowzilla-Cat-Attacking-City-with-Flames-Coloring-Page',
+      'Cat-with-Beanie-Knitting-on-a-Chair-by-the-Window-in-Winter-Coloring-Sheet',
+      'Cat-Licking-Water-from-a-Cup-Next-to-Scenic-Window-View-Coloring-Page-for-Kids',
+      'Curious-Cat-Sitting-on-a-Rooftop-with-City-Skyline-Coloring-Page',
+      'Chef-Cat-Making-Sushi-with-Chopsticks-Coloring-Page-for-Kids',
+      'Cat-in-Hiking-Uniform-and-Backpack-Inside-the-Jungle-Coloring-Page',
+      'Pretty-Striped-Cat-Sitting-Coloring-Sheet',
+      'Artistic-Cat-with-Ornamental-Floral-Details-and-Garden-Frame-Coloring-Sheet',
+      'Spooky-Halloween-Cat-Wearing-Witch-Hat-with-Pumpkins-and-Ghosts',
+      'Cat-With-Clothes-Standing-Up',
+      'Spotted-Cat-Stretching-In-Backyard-Coloring-In',
+      'Halloween-Cat-Wearing-Witch-Hat-with-Jack-o-Lantern-Coloring-Page-for-Kids',
+      'Fluffy-Kitten-Peeking-Out-of-a-Decorated-Box-Coloring-Page-for-Kids',
+      'Tiny-Cat-Inside-a-Teacup-Full-of-Flowers-Coloring-Page',
+      'Rich-Cat-Lounging-on-an-Armchair-Coloring-Sheet',
+      'Cat-Framed-by-Intricate-Floral-Mandala-Coloring-Page-for-Kids',
+      'Adorable-Christmas-Cat-in-Santa-Suit-Wrapped-in-Holiday-Lights-Coloring-Sheet-for-Kids',
+      'Three-Realistic-Kittens-Looking-Up',
+      'Playful-Cat-Building-a-Sandcastle-by-the-Beach',
+      'Unicorn-Cat-Sitting-on-Fluffy-Clouds-with-Sparkling-Stars-Coloring-Page',
+      'Intricate-Stained-Glass-Cat-Portrait-with-Bold-Whiskers',
+      'Kawaii-Cat-in-Scarf-Sitting-Under-Fairy-Lights-in-Winter',
+      'Hairy-Little-Cat-with-Big-Eyes-Coloring-Page-for-Preschoolers',
+      'Grumpy-Cat-in-Festive-Sweater-Sitting-Among-Christmas-Presents-Coloring-Page',
+      'Elegant-Cat-Sitting-Upright-with-Decorative-Ornamental-Mandala-Coloring-Page',
+      'DJ-Cat-Wearing-Sunglasses-and-Headphones-Coloring-Page',
+      'Adult-Cat-Looking-Up-Coloring-In',
+      'Detailed-Cat-Mandala-with-Ornate-Patterns-Coloring-Page-for-Adults',
+      'Cat-with-Unicorn-Horn-Sitting-Among-Flowers-Coloring-Page',
+      'Curious-Cat-Sniffing-Mushrooms-in-the-Forest-Coloring-Page',
+      'Christmas-Cat-Wrapped-in-a-Wool-Blanket-with-a-Hot-Drink-Next-to-Fireplace',
+      'Cat-with-Floral-Swirls-and-Petal-Patterns-Coloring-Page',
+      'Cat-Dreamcatcher-with-Feathers-Fish-and-Mouse-Charm-Coloring-Page-for-Kids',
+      'Adorable-Cat-Sleeping-on-a-Cloud-with-a-Rainbow-Coloring-Page-for-Preschoolers',
+      'Striped-Tabby-Cat-Smiling-at-Cupcakes-with-Cherries-on-Top-Coloring-Page-for-Kids',
+      'Siberian-Cat-Walking-On-Flower-Field-Coloring-In',
+      'Small-Cartoon-Cat-Flying-a-Kite-in-a-Park-Coloring-Page-for-Kids',
+      'Sleepy-Cat-Lying-on-a-Vintage-Record-Player-Coloring-Sheet',
+      'Realistic-Tabby-Cat-Resting-on-a-Window-Ledge-with-Balls-of-Yarn',
+      'Pretty-Cat-with-Flower-Crown-Dancing-Coloring-Sheet-for-Kids',
+      'Peaceful-Cat-Sitting-on-a-Crescent-Moon-in-the-Sky-Coloring-Page',
+      'Magical-Cat-with-Witch-Hat-Casting-a-Spell-Coloring-Sheet',
+      'Puss-In-Boots-Coloring-Sheet-For-Preschoolers',
+      'Pretty-Cat-Framed-by-Roses-Coloring-Page',
+      'Close-Up-Of-Realistic-Cat',
+      'Simple-Outline-Of-Realistic-Cat-Coloring-Page',
+      'Large-Cat-Curled-Up-Next-to-Books-in-a-Library',
+      'Happy-Cat-Dancing-with-Paws-Up-Coloring-Sheet-for-Kids',
+      'Furry-Cat-Holding-a-Flower-Coloring-Sheet-for-Preschoolers',
+      'Four-Baby-Cats-Playing-in-a-Flower-Garden-Coloring-Sheet',
+      'Cat-With-Toys-And-Food-Coloring-In',
+      'Easy-Striped-Cat-Playing-with-Balls-of-Yarn-Coloring-Page-for-Kids',
+      'Chubby-Cat-Playing-the-Guitar-with-Flowers-and-Musical-Notes-Coloring-Page-for-Kids',
+      'Cat-Sitting-Outside-Cat-House',
+      'Garfield-Holding-Crown-Coloring-In-For-Preschoolers',
+      'Easy-Outline-Of-Felix-The-Cat-Coloring-Sheet',
+      'Coloring-Page-Of-Hello-Kitty-Hugging-Teddy-Bear',
+      'Detailed-Garfield-Coloring-Page-For-Kids',
+      'Adult-Cat-Exposing-Belly',
+      'Kitten-Wearing-Pants-And-Hooded-Jacket',
+      'Cartoon-Cat-Winking-Coloring-Sheet',
+      'Cat-Lying-On-Bed-Coloring-Sheet',
+      'Norwegian-Forest-Cat-Coloring-Sheet',
+      'Coloring-Page-Of-Realistic-Striped-Cat',
+      'Coloring-Page-Of-Cat-Cleaning-Itself',
+      'Artistic-Stained-Glass-Cat-with-Swirling-Background-Coloring-Sheet',
+    ];
+    const pick = CAT_SHEETS[Math.floor(Math.random() * CAT_SHEETS.length)];
+    document.getElementById('thumb-cats').src = CAT_FOLDER + pick + '.jpg';
+  </script>
+</body>
+</html>
