@@ -795,8 +795,8 @@ body {
    ============================================================ */
 .cs-category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
   margin-bottom: 3rem;
 }
 
@@ -819,7 +819,7 @@ body {
 }
 
 .cs-category-thumb-wrap {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--bg);
 }
@@ -837,7 +837,7 @@ body {
 }
 
 .cs-category-label {
-  padding: 0.75rem 1rem;
+  padding: 0.4rem 0.6rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -845,12 +845,12 @@ body {
 }
 
 .cs-category-name {
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 700;
 }
 
 .cs-category-count {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--muted);
 }
 
