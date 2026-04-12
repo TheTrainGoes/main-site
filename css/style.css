@@ -913,6 +913,89 @@ body {
 }
 
 /* ============================================================
+   COLORING SHEETS — MULTI-CATEGORY LAYOUT
+   ============================================================ */
+.cs-multi-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.cat-sidebar {
+  flex: 0 0 200px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.cat-sidebar-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0.75rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-list-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 1rem;
+  font-size: 0.88rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s, color 0.1s;
+}
+
+.cat-list-btn:last-child {
+  border-bottom: none;
+}
+
+.cat-list-btn:hover {
+  background: var(--bg);
+}
+
+.cat-list-btn.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.cs-multi-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.cs-multi-header {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .cs-multi-layout {
+    flex-direction: column;
+  }
+  .cat-sidebar {
+    flex: none;
+    width: 100%;
+    position: static;
+    max-height: 200px;
+  }
+}
+
+/* ============================================================
    COLORING SHEETS — MODAL
    ============================================================ */
 .cs-modal {
