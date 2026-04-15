@@ -253,7 +253,7 @@ function generate() {
 
   // Money problems are wider, so use fewer columns
   const cols = OPERATION === 'money'
-    ? (count === 10 ? 2 : count === 20 ? 3 : 4)
+    ? (count === 6 ? 2 : 3)   // 6→2 cols (3 rows), 12→3 cols (4 rows), 18→3 cols (6 rows)
     : (count === 10 ? 2 : count === 20 ? 4 : 5);
   const titleText = `${GRADE_LABELS[grade]} ${label} Practice`;
 
