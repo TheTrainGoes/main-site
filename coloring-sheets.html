@@ -33,20 +33,9 @@
         </div>
       </a>
 
-      <a href="coloring-sheets-animals.html" class="cs-category-card" id="card-animals">
-        <div class="cs-category-thumb-wrap">
-          <img class="cs-category-thumb" id="thumb-animals" src="" alt="Animals coloring sheets">
-        </div>
-        <div class="cs-category-label">
-          <span class="cs-category-name">Animals</span>
-          <span class="cs-category-count">93 categories</span>
-        </div>
-      </a>
-
     </div>
   </main>
 
-  <script src="js/coloring-data-animals.js"></script>
   <script>
     function pickRandom(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
@@ -64,11 +53,6 @@
       'Unicorn-Cat-Sitting-on-Fluffy-Clouds-with-Sparkling-Stars-Coloring-Page',
     ];
     document.getElementById('thumb-cats').src = 'coloring sheets/cats/' + pickRandom(CAT_SHEETS) + '.jpg';
-
-    if (typeof ANIMALS_DATA !== 'undefined' && ANIMALS_DATA.length) {
-      const cat = pickRandom(ANIMALS_DATA);
-      document.getElementById('thumb-animals').src = 'coloring sheets/animals/' + pickRandom(cat.sheets) + '.jpg';
-    }
   </script>
 </body>
 </html>
