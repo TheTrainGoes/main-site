@@ -178,8 +178,9 @@ function fmtMoney(cents) {
 function buildProblemEl(idx, problem) {
   if (OPERATION === 'money') {
     const chips = problem.a.map(item => {
-      const cls = item.value >= 100 ? 'chip chip--bill' : 'chip chip--coin';
-      return `<span class="${cls}">${item.label}</span>`;
+      // Loonie ($1, value 100) is a coin in Canada; only $5+ are bills
+      const cls = item.value >= 500 ? 'chip chip--bill' : 'chip chip--coin';
+      return `<span class="${cls}" data-denom="${item.label}">${item.label}</span>`;
     }).join('');
     const div = document.createElement('div');
     div.className = 'math-problem money-problem';
