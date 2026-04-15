@@ -513,6 +513,9 @@ body {
 .chip--loonie  { width: 2.5em;  height: 2.5em;  background: #f5d070; border-color: #c8941a; color: #6b4800; }
 .chip--five    { background: #bfdbfe; border-color: #3b82f6; color: #1e3a8a; }
 .chip--ten     { background: #ddd6fe; border-color: #7c3aed; color: #3b0764; }
+.chip--twenty  { background: #bbf7d0; border-color: #16a34a; color: #14532d; }
+.chip--fifty   { background: #fecaca; border-color: #dc2626; color: #7f1d1d; }
+.chip--hundred { background: #fde68a; border-color: #d97706; color: #78350f; }
 
 .money-answer-row {
   display: flex;
@@ -1290,6 +1293,9 @@ body {
   .chip--loonie  { background: #f5d070 !important; border-color: #c8941a !important; }
   .chip--five    { background: #bfdbfe !important; border-color: #3b82f6 !important; }
   .chip--ten     { background: #ddd6fe !important; border-color: #7c3aed !important; }
+  .chip--twenty  { background: #bbf7d0 !important; border-color: #16a34a !important; }
+  .chip--fifty   { background: #fecaca !important; border-color: #dc2626 !important; }
+  .chip--hundred { background: #fde68a !important; border-color: #d97706 !important; }
 
   .money-answer-box {
     min-width: 0.65in;

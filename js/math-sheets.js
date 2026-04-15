@@ -103,7 +103,7 @@ function makeProblem(grade) {
         { label: '5\u00a2',  value: 5   },
         { label: '10\u00a2', value: 10  }
       ];
-      const ALL_POOL = [
+      const G1_POOL = [
         { label: '1\u00a2',  value: 1   },
         { label: '5\u00a2',  value: 5   },
         { label: '10\u00a2', value: 10  },
@@ -112,7 +112,15 @@ function makeProblem(grade) {
         { label: '$5',        value: 500 },
         { label: '$10',       value: 1000}
       ];
-      const pool  = grade === 'kindergarten' ? K_POOL : ALL_POOL;
+      const FULL_POOL = [
+        ...G1_POOL,
+        { label: '$20',  value: 2000  },
+        { label: '$50',  value: 5000  },
+        { label: '$100', value: 10000 }
+      ];
+      const pool = grade === 'kindergarten' ? K_POOL
+                 : grade === 'grade1'       ? G1_POOL
+                 :                           FULL_POOL;
       const count = { kindergarten: rand(3, 6), grade1: 5, grade2: 6,
                       grade3: 7, grade4: 8, grade5: 9, grade6: 10 }[grade] || 5;
       const items = [];
@@ -153,7 +161,8 @@ function buildProblemEl(idx, problem) {
       const denomClass = {
         '1\u00a2': 'chip--penny', '5\u00a2': 'chip--nickel',
         '10\u00a2': 'chip--dime', '25\u00a2': 'chip--quarter',
-        '$1': 'chip--loonie', '$5': 'chip--five', '$10': 'chip--ten'
+        '$1': 'chip--loonie', '$5': 'chip--five', '$10': 'chip--ten',
+        '$20': 'chip--twenty', '$50': 'chip--fifty', '$100': 'chip--hundred'
       }[item.label] || '';
       return `<span class="chip ${shape} ${denomClass}">${item.label}</span>`;
     }).join('');
