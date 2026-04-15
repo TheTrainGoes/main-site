@@ -7,7 +7,8 @@ const OP_META = {
   addition:       { label: 'Addition',       symbol: '+' },
   subtraction:    { label: 'Subtraction',    symbol: '\u2212' },
   multiplication: { label: 'Multiplication', symbol: '\u00d7' },
-  division:       { label: 'Division',       symbol: '\u00f7' }
+  division:       { label: 'Division',       symbol: '\u00f7' },
+  money:          { label: 'Money Counting', symbol: '$' }
 };
 
 // Which grade levels are available per operation
@@ -15,12 +16,14 @@ const VALID_GRADES = {
   addition:       ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6'],
   subtraction:    ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6'],
   multiplication: ['grade2','grade3','grade4','grade5','grade6'],
-  division:       ['grade3','grade4','grade5','grade6']
+  division:       ['grade3','grade4','grade5','grade6'],
+  money:          ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6']
 };
 
 // Default selected grade per operation
 const DEFAULT_GRADE = {
-  addition: 'grade2', subtraction: 'grade2', multiplication: 'grade3', division: 'grade3'
+  addition: 'grade2', subtraction: 'grade2', multiplication: 'grade3', division: 'grade3',
+  money: 'grade2'
 };
 
 const GRADE_LABELS = {
@@ -91,6 +94,67 @@ function makeProblem(grade) {
         default:       b = rand(2,9);  a = b * rand(2,12);
       }
       break;
+
+    case 'money': {
+      // a = array of coin/bill objects, b = total in cents
+      const items = [];
+      function addItems(label, value, count) {
+        for (let i = 0; i < count; i++) items.push({ label, value });
+      }
+      switch (grade) {
+        case 'kindergarten':
+          addItems('1¢', 1, rand(2, 10));
+          break;
+        case 'grade1':
+          addItems('5¢', 5, rand(1, 4));
+          addItems('1¢', 1, rand(0, 5));
+          break;
+        case 'grade2':
+          addItems('10¢', 10, rand(1, 4));
+          addItems('5¢', 5, rand(0, 2));
+          addItems('1¢', 1, rand(0, 4));
+          break;
+        case 'grade3':
+          addItems('25¢', 25, rand(1, 3));
+          addItems('10¢', 10, rand(0, 2));
+          addItems('5¢', 5, rand(0, 2));
+          addItems('1¢', 1, rand(0, 3));
+          break;
+        case 'grade4':
+          addItems('$1', 100, rand(1, 4));
+          addItems('25¢', 25, rand(0, 3));
+          addItems('10¢', 10, rand(0, 2));
+          addItems('1¢', 1, rand(0, 3));
+          break;
+        case 'grade5':
+          addItems('$5', 500, rand(1, 2));
+          addItems('$1', 100, rand(0, 3));
+          addItems('25¢', 25, rand(0, 2));
+          addItems('10¢', 10, rand(0, 2));
+          addItems('1¢', 1, rand(0, 3));
+          break;
+        case 'grade6':
+          addItems('$10', 1000, rand(0, 1));
+          addItems('$5', 500, rand(0, 2));
+          addItems('$1', 100, rand(1, 4));
+          addItems('25¢', 25, rand(0, 3));
+          addItems('10¢', 10, rand(0, 2));
+          addItems('1¢', 1, rand(0, 4));
+          break;
+        default:
+          addItems('25¢', 25, rand(1, 3));
+          addItems('10¢', 10, rand(0, 2));
+          addItems('1¢', 1, rand(0, 3));
+      }
+      // Shuffle
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      a = items;
+      b = items.reduce((sum, item) => sum + item.value, 0);
+      break;
+    }
   }
 
   return { a, b };
@@ -104,7 +168,33 @@ function fmt(n) {
   return n.toLocaleString('en-US');
 }
 
+function fmtMoney(cents) {
+  if (cents < 100) return cents + '\u00a2';
+  const dollars = Math.floor(cents / 100);
+  const c = cents % 100;
+  return '$' + dollars + '.' + String(c).padStart(2, '0');
+}
+
 function buildProblemEl(idx, problem) {
+  if (OPERATION === 'money') {
+    const chips = problem.a.map(item => {
+      const cls = item.value >= 100 ? 'chip chip--bill' : 'chip chip--coin';
+      return `<span class="${cls}">${item.label}</span>`;
+    }).join('');
+    const div = document.createElement('div');
+    div.className = 'math-problem money-problem';
+    div.innerHTML =
+      `<div class="money-problem-top">` +
+        `<span class="mp-num">${idx}.</span>` +
+        `<div class="money-chips">${chips}</div>` +
+      `</div>` +
+      `<div class="money-answer-row">` +
+        `<span class="money-label">Total =</span>` +
+        `<div class="mp-answer-box money-answer-box"></div>` +
+      `</div>`;
+    return div;
+  }
+
   const { a, b } = problem;
   const sym = OP_META[OPERATION].symbol;
 
@@ -153,6 +243,7 @@ function getAnswer(a, b) {
     case 'subtraction':    return a - b;
     case 'multiplication': return a * b;
     case 'division':       return a / b;
+    case 'money':          return b; // b is precomputed total in cents
   }
 }
 
@@ -175,8 +266,10 @@ function generate() {
   const count = parseInt(countEl.value, 10);
   const { label } = OP_META[OPERATION];
 
-  // 10 → 2 cols (5 rows), 20 → 4 cols (5 rows), 30 → 5 cols (6 rows)
-  const cols = count === 10 ? 2 : count === 20 ? 4 : 5;
+  // Money problems are wider, so use fewer columns
+  const cols = OPERATION === 'money'
+    ? (count === 10 ? 2 : count === 20 ? 3 : 4)
+    : (count === 10 ? 2 : count === 20 ? 4 : 5);
   const titleText = `${GRADE_LABELS[grade]} ${label} Practice`;
 
   titleEl.textContent = titleText;
@@ -193,7 +286,8 @@ function generate() {
 
     const item = document.createElement('div');
     item.className = 'answer-item';
-    item.textContent = `${i}. ${fmt(getAnswer(problem.a, problem.b))}`;
+    const ans = getAnswer(problem.a, problem.b);
+    item.textContent = `${i}. ${OPERATION === 'money' ? fmtMoney(ans) : fmt(ans)}`;
     answerGridEl.appendChild(item);
   }
 

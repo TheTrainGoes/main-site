@@ -399,6 +399,7 @@ body {
 
 /* Font size scales with column count */
 .math-problems-grid.cols-2 .math-problem { font-size: 1.6rem; }
+.math-problems-grid.cols-3 .math-problem { font-size: 1.35rem; }
 .math-problems-grid.cols-4 .math-problem { font-size: 1.25rem; }
 .math-problems-grid.cols-5 .math-problem { font-size: 1.05rem; }
 
@@ -458,6 +459,72 @@ body {
   border: 1.5px solid var(--border);
   border-radius: 3px;
   background: #fff;
+}
+
+/* Money counting problems */
+.money-problem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.money-problem-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.money-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65em;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1;
+}
+
+.chip--coin {
+  width: 2.1em;
+  height: 2.1em;
+  border-radius: 50%;
+  background: #fef3c7;
+  border: 2px solid #d4a017;
+  color: #7c5a00;
+}
+
+.chip--bill {
+  padding: 0.25em 0.45em;
+  border-radius: 3px;
+  background: #dcfce7;
+  border: 2px solid #4ade80;
+  color: #166534;
+}
+
+.money-answer-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-left: 1.35rem;
+}
+
+.money-label {
+  font-size: 0.7em;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.money-answer-box {
+  min-width: 4rem;
 }
 
 /* Answer key checkbox label */
@@ -1202,9 +1269,30 @@ body {
 
   /* Consistent font size on print — 5–6 rows fits on one page */
   .math-problems-grid.cols-2 .math-problem,
+  .math-problems-grid.cols-3 .math-problem,
   .math-problems-grid.cols-4 .math-problem,
   .math-problems-grid.cols-5 .math-problem {
     font-size: 13pt;
+  }
+
+  /* Money chips — force background colors to print */
+  .chip--coin {
+    background: #fef3c7 !important;
+    border-color: #d4a017 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .chip--bill {
+    background: #dcfce7 !important;
+    border-color: #4ade80 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .money-answer-box {
+    min-width: 0.65in;
+    height: 0.28in;
   }
 
   .ws-score {
