@@ -179,8 +179,13 @@ function buildProblemEl(idx, problem) {
   if (OPERATION === 'money') {
     const chips = problem.a.map(item => {
       // Loonie ($1, value 100) is a coin in Canada; only $5+ are bills
-      const cls = item.value >= 500 ? 'chip chip--bill' : 'chip chip--coin';
-      return `<span class="${cls}" data-denom="${item.label}">${item.label}</span>`;
+      const shape = item.value >= 500 ? 'chip--bill' : 'chip--coin';
+      const denomClass = {
+        '1\u00a2': 'chip--penny', '5\u00a2': 'chip--nickel',
+        '10\u00a2': 'chip--dime', '25\u00a2': 'chip--quarter',
+        '$1': 'chip--loonie', '$5': 'chip--five', '$10': 'chip--ten'
+      }[item.label] || '';
+      return `<span class="chip ${shape} ${denomClass}">${item.label}</span>`;
     }).join('');
     const div = document.createElement('div');
     div.className = 'math-problem money-problem';

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:www.bankofcanada.ca)",
+      "Bash(sed -i 's/style\\\\.css?v=8/style.css?v=9/g' *.html)",
+      "Bash(grep -l \"style.css?v=9\" *.html)"
+    ]
+  }
+}

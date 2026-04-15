@@ -506,32 +506,13 @@ body {
 /* Canadian coin sizes (proportional to real diameters):
    Dime 18.03mm < Penny 19.05mm < Nickel 21.2mm < Quarter 23.88mm < Loonie 26.5mm
    Scaled so loonie = 2.5em */
-.chip[data-denom="10¢"] { /* Dime — silver, smallest */
-  width: 1.7em; height: 1.7em;
-  background: #e8e8e8; border-color: #a0a0a0; color: #2a2a2a;
-}
-.chip[data-denom="1¢"] { /* Penny — copper */
-  width: 1.8em; height: 1.8em;
-  background: #f5c07a; border-color: #b87333; color: #7a3f00;
-}
-.chip[data-denom="5¢"] { /* Nickel — silver-grey */
-  width: 2.0em; height: 2.0em;
-  background: #dcdcdc; border-color: #8c8c8c; color: #2a2a2a;
-}
-.chip[data-denom="25¢"] { /* Quarter — silver */
-  width: 2.25em; height: 2.25em;
-  background: #dcdcdc; border-color: #8c8c8c; color: #2a2a2a;
-}
-.chip[data-denom="$1"] { /* Loonie — gold/bronze */
-  width: 2.5em; height: 2.5em;
-  background: #f5d070; border-color: #c8941a; color: #6b4800;
-}
-.chip[data-denom="$5"] { /* Canadian $5 — blue */
-  background: #bfdbfe; border-color: #3b82f6; color: #1e3a8a;
-}
-.chip[data-denom="$10"] { /* Canadian $10 — purple */
-  background: #ddd6fe; border-color: #7c3aed; color: #3b0764;
-}
+.chip--dime    { width: 1.7em;  height: 1.7em;  background: #e8e8e8; border-color: #a0a0a0; color: #2a2a2a; }
+.chip--penny   { width: 1.8em;  height: 1.8em;  background: #f5c07a; border-color: #b87333; color: #7a3f00; }
+.chip--nickel  { width: 2.0em;  height: 2.0em;  background: #dcdcdc; border-color: #8c8c8c; color: #2a2a2a; }
+.chip--quarter { width: 2.25em; height: 2.25em; background: #dcdcdc; border-color: #8c8c8c; color: #2a2a2a; }
+.chip--loonie  { width: 2.5em;  height: 2.5em;  background: #f5d070; border-color: #c8941a; color: #6b4800; }
+.chip--five    { background: #bfdbfe; border-color: #3b82f6; color: #1e3a8a; }
+.chip--ten     { background: #ddd6fe; border-color: #7c3aed; color: #3b0764; }
 
 .money-answer-row {
   display: flex;
@@ -1301,17 +1282,14 @@ body {
   }
 
   /* Money chips — force per-denomination colors to print */
-  .chip {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .chip[data-denom="10¢"] { background: #e8e8e8 !important; border-color: #a0a0a0 !important; }
-  .chip[data-denom="1¢"]  { background: #f5c07a !important; border-color: #b87333 !important; }
-  .chip[data-denom="5¢"]  { background: #dcdcdc !important; border-color: #8c8c8c !important; }
-  .chip[data-denom="25¢"] { background: #dcdcdc !important; border-color: #8c8c8c !important; }
-  .chip[data-denom="$1"]  { background: #f5d070 !important; border-color: #c8941a !important; }
-  .chip[data-denom="$5"]  { background: #bfdbfe !important; border-color: #3b82f6 !important; }
-  .chip[data-denom="$10"] { background: #ddd6fe !important; border-color: #7c3aed !important; }
+  .chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .chip--dime    { background: #e8e8e8 !important; border-color: #a0a0a0 !important; }
+  .chip--penny   { background: #f5c07a !important; border-color: #b87333 !important; }
+  .chip--nickel  { background: #dcdcdc !important; border-color: #8c8c8c !important; }
+  .chip--quarter { background: #dcdcdc !important; border-color: #8c8c8c !important; }
+  .chip--loonie  { background: #f5d070 !important; border-color: #c8941a !important; }
+  .chip--five    { background: #bfdbfe !important; border-color: #3b82f6 !important; }
+  .chip--ten     { background: #ddd6fe !important; border-color: #7c3aed !important; }
 
   .money-answer-box {
     min-width: 0.65in;
