@@ -96,61 +96,31 @@ function makeProblem(grade) {
       break;
 
     case 'money': {
-      // a = array of coin/bill objects, b = total in cents
+      // Kindergarten: pennies, nickels, dimes only (3–6 pieces)
+      // Grade 1+: all denominations, count increases by 1 each grade (5, 6, 7, 8, 9, 10)
+      const K_POOL = [
+        { label: '1\u00a2',  value: 1   },
+        { label: '5\u00a2',  value: 5   },
+        { label: '10\u00a2', value: 10  }
+      ];
+      const ALL_POOL = [
+        { label: '1\u00a2',  value: 1   },
+        { label: '5\u00a2',  value: 5   },
+        { label: '10\u00a2', value: 10  },
+        { label: '25\u00a2', value: 25  },
+        { label: '$1',        value: 100 },
+        { label: '$5',        value: 500 },
+        { label: '$10',       value: 1000}
+      ];
+      const pool  = grade === 'kindergarten' ? K_POOL : ALL_POOL;
+      const count = { kindergarten: rand(3, 6), grade1: 5, grade2: 6,
+                      grade3: 7, grade4: 8, grade5: 9, grade6: 10 }[grade] || 5;
       const items = [];
-      function addItems(label, value, count) {
-        for (let i = 0; i < count; i++) items.push({ label, value });
+      for (let i = 0; i < count; i++) {
+        items.push(pool[rand(0, pool.length - 1)]);
       }
-      switch (grade) {
-        case 'kindergarten':
-          addItems('1¢', 1, rand(2, 10));
-          break;
-        case 'grade1':
-          addItems('5¢', 5, rand(1, 4));
-          addItems('1¢', 1, rand(0, 5));
-          break;
-        case 'grade2':
-          addItems('10¢', 10, rand(1, 4));
-          addItems('5¢', 5, rand(0, 2));
-          addItems('1¢', 1, rand(0, 4));
-          break;
-        case 'grade3':
-          addItems('25¢', 25, rand(1, 3));
-          addItems('10¢', 10, rand(0, 2));
-          addItems('5¢', 5, rand(0, 2));
-          addItems('1¢', 1, rand(0, 3));
-          break;
-        case 'grade4':
-          addItems('$1', 100, rand(1, 4));
-          addItems('25¢', 25, rand(0, 3));
-          addItems('10¢', 10, rand(0, 2));
-          addItems('1¢', 1, rand(0, 3));
-          break;
-        case 'grade5':
-          addItems('$5', 500, rand(1, 2));
-          addItems('$1', 100, rand(0, 3));
-          addItems('25¢', 25, rand(0, 2));
-          addItems('10¢', 10, rand(0, 2));
-          addItems('1¢', 1, rand(0, 3));
-          break;
-        case 'grade6':
-          addItems('$10', 1000, rand(0, 1));
-          addItems('$5', 500, rand(0, 2));
-          addItems('$1', 100, rand(1, 4));
-          addItems('25¢', 25, rand(0, 3));
-          addItems('10¢', 10, rand(0, 2));
-          addItems('1¢', 1, rand(0, 4));
-          break;
-        default:
-          addItems('25¢', 25, rand(1, 3));
-          addItems('10¢', 10, rand(0, 2));
-          addItems('1¢', 1, rand(0, 3));
-      }
-      // Shuffle
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
+      // Sort largest to smallest so bills come before coins
+      items.sort((x, y) => y.value - x.value);
       a = items;
       b = items.reduce((sum, item) => sum + item.value, 0);
       break;
