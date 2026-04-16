@@ -23,7 +23,7 @@ const BUDGET_BY_GRADE = {
   grade6: 4000         // $40.00
 };
 
-// Menu items and base prices
+// Menu items
 const MENU_ITEMS = [
   'Ice Cream Cone',
   'Sundae',
@@ -49,7 +49,7 @@ let currentPrices = {};
 
 function getItemCountForGrade(grade) {
   switch (grade) {
-    case 'kindergarten': return 6;  // Same as grade 1 for kindergarten
+    case 'kindergarten': return 6;
     case 'grade1': return 6;
     case 'grade2': return 7;
     case 'grade3': return 8;
@@ -71,7 +71,7 @@ function getVisibleMenuItems(grade) {
 
 function init() {
   populateGradeSelect();
-  generateNewGame();
+  document.getElementById('generate-btn').addEventListener('click', generateWorksheet);
 }
 
 function populateGradeSelect() {
@@ -89,15 +89,18 @@ function populateGradeSelect() {
   gradeSelect.addEventListener('change', (e) => {
     currentGrade = e.target.value;
     currentBudget = BUDGET_BY_GRADE[currentGrade];
-    generateNewPrices();
-    updateDisplay();
   });
 }
 
-function generateNewGame() {
-  generateNewPrices();
-  clearOrderInput();
-  updateDisplay();
+function generateWorksheet() {
+  currentGrade = document.getElementById('grade').value;
+  currentBudget = BUDGET_BY_GRADE[currentGrade];
+  generatePrices();
+  
+  updateWorksheetHeader();
+  updateWorksheetMenu();
+  updateProblemBudget();
+  generateSampleSolutions();
 }
 
 // ============================================================
@@ -108,32 +111,31 @@ function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function generateNewPrices() {
+function generatePrices() {
   currentPrices = {};
   
-  // Prices vary based on grade level
   let minPrice, maxPrice;
   switch (currentGrade) {
     case 'kindergarten':
-      minPrice = 50; maxPrice = 150;   // $0.50 to $1.50
+      minPrice = 50; maxPrice = 150;
       break;
     case 'grade1':
-      minPrice = 100; maxPrice = 300;  // $1.00 to $3.00
+      minPrice = 100; maxPrice = 300;
       break;
     case 'grade2':
-      minPrice = 100; maxPrice = 400;  // $1.00 to $4.00
+      minPrice = 100; maxPrice = 400;
       break;
     case 'grade3':
-      minPrice = 125; maxPrice = 500;  // $1.25 to $5.00
+      minPrice = 125; maxPrice = 500;
       break;
     case 'grade4':
-      minPrice = 150; maxPrice = 600;  // $1.50 to $6.00
+      minPrice = 150; maxPrice = 600;
       break;
     case 'grade5':
-      minPrice = 200; maxPrice = 750;  // $2.00 to $7.50
+      minPrice = 200; maxPrice = 750;
       break;
     case 'grade6':
-      minPrice = 250; maxPrice = 1000; // $2.50 to $10.00
+      minPrice = 250; maxPrice = 1000;
       break;
     default:
       minPrice = 100; maxPrice = 400;
@@ -146,9 +148,7 @@ function generateNewPrices() {
     let price;
     
     if (isGrade3Plus) {
-      // Grades 3+ use non-rounded prices (like $1.99)
       price = rand(minPrice, maxPrice);
-      // Occasionally add .99 cents for variety
       if (Math.random() < 0.4) {
         const dollarAmount = Math.floor(price / 100);
         price = dollarAmount * 100 + 99;
@@ -157,159 +157,130 @@ function generateNewPrices() {
         }
       }
     } else {
-      // Grades 1-2 use rounded prices (quarters)
       const priceInQuarters = rand(Math.ceil(minPrice / 25), Math.floor(maxPrice / 25));
       price = priceInQuarters * 25;
     }
     
     currentPrices[item] = price;
   });
+}
+
+// ============================================================
+// WORKSHEET GENERATION
+// ============================================================
+
+function updateWorksheetHeader() {
+  const header = document.getElementById('worksheet-header');
+  header.innerHTML = `<strong>${GRADE_LABELS[currentGrade]}</strong> — Order Board Worksheet`;
+}
+
+function updateWorksheetMenu() {
+  const menuArea = document.getElementById('worksheet-menu');
+  menuArea.innerHTML = '';
   
-  // Add 0 prices for items not currently displayed (so calculation still works if typed)
-  MENU_ITEMS.forEach(item => {
-    if (!visibleItems.includes(item)) {
-      currentPrices[item] = 0;
-    }
-  });
-}
-
-// ============================================================
-// DISPLAY UPDATES
-// ============================================================
-
-function updateDisplay() {
-  updateBudgetDisplay();
-  updateMenuBoard();
-  updateOrderSummary();
-}
-
-function updateBudgetDisplay() {
-  const budgetDisplay = document.getElementById('budget-display');
-  budgetDisplay.textContent = centsToDollars(currentBudget);
-}
-
-function updateMenuBoard() {
-  const menuBoard = document.getElementById('menu-board');
-  menuBoard.innerHTML = '';
-
   const visibleItems = getVisibleMenuItems(currentGrade);
+  const menuGrid = document.createElement('div');
+  menuGrid.className = 'worksheet-menu-grid';
+  
   visibleItems.forEach(item => {
     const price = currentPrices[item];
-    const card = document.createElement('div');
-    card.className = 'menu-item';
-    card.innerHTML = `
-      <div class="item-name">${item}</div>
-      <div class="item-price">${centsToDollars(price)}</div>
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'worksheet-menu-item';
+    itemDiv.innerHTML = `
+      <div class="ws-item-name">${item}</div>
+      <div class="ws-item-price">${centsToDollars(price)}</div>
     `;
-    menuBoard.appendChild(card);
+    menuGrid.appendChild(itemDiv);
   });
-}
-
-function updateOrderSummary() {
-  const budgetSummary = document.getElementById('summary-budget');
-  budgetSummary.textContent = centsToDollars(currentBudget);
   
-  const totalSpent = calculateOrderTotal();
-  const remaining = currentBudget - totalSpent;
-
-  const totalDisplay = document.getElementById('summary-total');
-  totalDisplay.textContent = centsToDollars(totalSpent);
-  totalDisplay.className = totalSpent > currentBudget ? 'over-budget' : '';
-
-  const remainingDisplay = document.getElementById('summary-remaining');
-  remainingDisplay.textContent = centsToDollars(Math.max(0, remaining));
-  remainingDisplay.className = remaining < 0 ? 'over-budget' : '';
+  menuArea.appendChild(menuGrid);
 }
 
-function clearOrderInput() {
-  document.getElementById('order-list').value = '';
-  document.getElementById('result-message').textContent = '';
-  document.getElementById('result-message').className = 'result-message hidden';
-  updateOrderSummary();
+function updateProblemBudget() {
+  const budgetEl = document.getElementById('problem-budget');
+  budgetEl.textContent = centsToDollars(currentBudget);
 }
 
 // ============================================================
-// ORDER CALCULATION
+// SAMPLE SOLUTIONS
 // ============================================================
 
-function calculateOrderTotal() {
-  const orderText = document.getElementById('order-list').value;
-  if (!orderText.trim()) {
-    return 0;
+function generateSampleSolutions() {
+  const solutions = [];
+  const visibleItems = getVisibleMenuItems(currentGrade);
+  
+  // Generate 4 different solution combinations
+  for (let i = 0; i < 4; i++) {
+    const solution = findSolutionCombination(visibleItems);
+    if (solution) {
+      solutions.push(solution);
+    }
   }
+  
+  displaySampleSolutions(solutions);
+}
 
-  let total = 0;
-  const lines = orderText.split('\n').map(line => line.trim());
-
-  lines.forEach(line => {
-    if (!line) return;
-
-    // Try to find matching items (case-insensitive)
-    let found = false;
-    for (const [item, price] of Object.entries(currentPrices)) {
-      if (item.toLowerCase() === line.toLowerCase()) {
-        total += price;
-        found = true;
-        break;
+function findSolutionCombination(items) {
+  // Try to find a combination that's close to budget
+  const maxAttempts = 50;
+  let bestCombo = null;
+  let bestDiff = currentBudget + 100;
+  
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const combo = [];
+    let total = 0;
+    
+    // Pick 2-5 random items
+    const itemCount = rand(2, Math.min(5, items.length));
+    const selectedIndices = new Set();
+    
+    for (let i = 0; i < itemCount; i++) {
+      let idx;
+      do {
+        idx = rand(0, items.length - 1);
+      } while (selectedIndices.has(idx));
+      selectedIndices.add(idx);
+      
+      const item = items[idx];
+      combo.push(item);
+      total += currentPrices[item];
+    }
+    
+    // Check if this is a good solution (under budget and close to it)
+    if (total <= currentBudget) {
+      const diff = currentBudget - total;
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        bestCombo = { items: combo, total: total, remaining: diff };
       }
     }
+  }
+  
+  return bestCombo;
+}
 
-    if (!found) {
-      // Try partial matching for common variations
-      const lowercaseLine = line.toLowerCase();
-      for (const [item, price] of Object.entries(currentPrices)) {
-        if (item.toLowerCase().includes(lowercaseLine) || lowercaseLine.includes(item.toLowerCase())) {
-          total += price;
-          found = true;
-          break;
-        }
-      }
-    }
+function displaySampleSolutions(solutions) {
+  const container = document.getElementById('sample-solutions');
+  container.innerHTML = '';
+  
+  solutions.forEach((solution, index) => {
+    const solutionDiv = document.createElement('div');
+    solutionDiv.className = 'sample-solution';
+    
+    let itemsText = solution.items.join(' + ');
+    let equation = `${itemsText} = ${centsToDollars(solution.total)}`;
+    
+    const remaining = currentBudget - solution.total;
+    const remainingText = remaining === 0 ? 'Perfect!' : `${centsToDollars(remaining)} left`;
+    
+    solutionDiv.innerHTML = `
+      <div class="solution-label">Sample ${index + 1}:</div>
+      <div class="solution-equation">${equation}</div>
+      <div class="solution-note">${remainingText}</div>
+    `;
+    
+    container.appendChild(solutionDiv);
   });
-
-  return total;
-}
-
-function checkOrder() {
-  const orderText = document.getElementById('order-list').value.trim();
-  if (!orderText) {
-    showMessage('Please write what you want to order!', 'error');
-    return;
-  }
-
-  const total = calculateOrderTotal();
-  const remaining = currentBudget - total;
-  const resultMessage = document.getElementById('result-message');
-
-  if (total === 0) {
-    showMessage("I couldn't find those items on the menu. Try using names from the menu board!", 'error');
-    return;
-  }
-
-  if (remaining < 0) {
-    const overage = Math.abs(remaining);
-    showMessage(
-      `You went over budget by ${centsToDollars(overage)}! 😢 Try ordering fewer items.`,
-      'error'
-    );
-  } else if (remaining === 0) {
-    showMessage(
-      `Perfect! You spent exactly your whole budget! 🎉`,
-      'success'
-    );
-  } else {
-    const percentage = Math.round((total / currentBudget) * 100);
-    showMessage(
-      `Great job! You spent ${centsToDollars(total)} and have ${centsToDollars(remaining)} left (${percentage}% of your budget). 👍`,
-      'success'
-    );
-  }
-}
-
-function showMessage(message, type) {
-  const resultMessage = document.getElementById('result-message');
-  resultMessage.textContent = message;
-  resultMessage.className = `result-message ${type}`;
 }
 
 // ============================================================
@@ -321,30 +292,7 @@ function centsToDollars(cents) {
 }
 
 // ============================================================
-// EVENT LISTENERS
-// ============================================================
-
-document.getElementById('random-btn').addEventListener('click', () => {
-  generateNewPrices();
-  updateDisplay();
-});
-
-document.getElementById('new-game-btn').addEventListener('click', () => {
-  generateNewGame();
-});
-
-document.getElementById('calculate-btn').addEventListener('click', () => {
-  updateOrderSummary();
-  checkOrder();
-});
-
-// Update order summary as user types
-document.getElementById('order-list').addEventListener('input', () => {
-  updateOrderSummary();
-});
-
-// ============================================================
-// START THE GAME
+// START
 // ============================================================
 
 init();

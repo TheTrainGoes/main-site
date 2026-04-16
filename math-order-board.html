@@ -18,8 +18,8 @@
     <div class="no-print">
       <a href="index.html" class="back-link">&larr; Back to Home</a>
       <div class="page-title">
-        <h1>Order Board Math Game</h1>
-        <p>Pick a grade level and decide what to order from the menu. Try to spend as close to your budget as possible without going over!</p>
+        <h1>Order Board Worksheet</h1>
+        <p>Pick a grade level and generate a printable worksheet.</p>
       </div>
     </div>
 
@@ -32,58 +32,48 @@
         </div>
 
         <div class="form-group form-group--btn">
-          <button id="random-btn" class="btn btn-primary">Random Prices</button>
-        </div>
-
-        <div class="form-group form-group--btn">
-          <button id="new-game-btn" class="btn btn-secondary">New Game</button>
+          <button id="generate-btn" class="btn btn-primary">Generate Worksheet</button>
         </div>
       </div>
     </div>
 
-    <!-- Main Game Area -->
-    <div class="game-container">
-      <div class="budget-section">
-        <div class="budget-display">
-          <h2>Your Budget</h2>
-          <div class="budget-amount" id="budget-display">$0.00</div>
+    <!-- Printable Worksheet -->
+    <div class="worksheet-container" id="worksheet">
+      <!-- Grade and title (printed at top) -->
+      <div class="worksheet-header no-print" id="worksheet-header"></div>
+
+      <!-- Menu Section -->
+      <div class="worksheet-menu-section">
+        <h2>Menu</h2>
+        <div class="worksheet-menu" id="worksheet-menu"></div>
+      </div>
+
+      <!-- Problem Section -->
+      <div class="worksheet-problem-section">
+        <div class="problem-title">
+          <div>Your Budget: <span id="problem-budget" class="budget-highlight"></span></div>
+        </div>
+        
+        <p class="problem-instructions">Use the menu above. Choose items to buy that add up as close as possible to your budget without going over. Write down what you are going to order:</p>
+        
+        <div class="answer-lines">
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+        </div>
+
+        <div class="total-line">
+          <span>Total: </span>
+          <span class="line"></span>
         </div>
       </div>
 
-      <div class="game-content">
-        <!-- Menu Board -->
-        <div class="menu-section">
-          <h2>Menu</h2>
-          <div class="menu-grid" id="menu-board"></div>
-        </div>
-
-        <!-- Order Section -->
-        <div class="order-section">
-          <h2>Your Order</h2>
-          <div class="order-input-area">
-            <textarea id="order-list" placeholder="Write what you want to order here, one item per line"></textarea>
-            <small class="help-text">Example: ice cream cone, sundae, slushie</small>
-          </div>
-
-          <div class="order-summary">
-            <div class="summary-row">
-              <span>Budget:</span>
-              <span id="summary-budget">$0.00</span>
-            </div>
-            <div class="summary-row">
-              <span>Your Total:</span>
-              <span id="summary-total">$0.00</span>
-            </div>
-            <div class="summary-row">
-              <span>Remaining:</span>
-              <span id="summary-remaining">$0.00</span>
-            </div>
-          </div>
-
-          <button id="calculate-btn" class="btn btn-success">Calculate My Order</button>
-
-          <div id="result-message" class="result-message hidden"></div>
-        </div>
+      <!-- Answer Key Section -->
+      <div class="answer-key-section show-on-print" id="answer-key">
+        <div class="answer-key-title">Answer Key – Sample Solutions</div>
+        <div class="sample-solutions" id="sample-solutions"></div>
       </div>
     </div>
   </main>

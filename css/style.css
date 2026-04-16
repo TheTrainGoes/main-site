@@ -1151,219 +1151,445 @@ body {
 }
 
 /* ============================================================
-   ORDER BOARD GAME
+   ORDER BOARD WORKSHEET (PRINTABLE)
    ============================================================ */
-.game-container {
-  margin-bottom: 2rem;
-}
 
-.budget-section {
+.worksheet-container {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.worksheet-header {
   text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text);
 }
 
-.budget-display {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+.worksheet-menu-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
 }
 
-.budget-display h2 {
+.worksheet-menu-section h2 {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
 }
 
-.budget-amount {
-  font-size: 2.5rem;
+.worksheet-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.worksheet-menu-item {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.ws-item-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.ws-item-price {
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--primary);
 }
 
-.game-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+.worksheet-problem-section {
+  margin-bottom: 2rem;
 }
 
-.menu-section {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-}
-
-.menu-section h2 {
+.problem-title {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text);
 }
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+.budget-highlight {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
-.menu-item {
-  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem;
-  text-align: center;
-  transition: box-shadow 0.15s, transform 0.15s;
-}
-
-.menu-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: var(--primary);
-}
-
-.item-name {
-  font-size: 0.85rem;
-  font-weight: 600;
+.problem-instructions {
+  font-size: 0.95rem;
   color: var(--text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
-.item-price {
+.answer-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.answer-line {
+  border-bottom: 1px solid var(--text);
+  height: 1.75rem;
+}
+
+.total-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.total-line .line {
+  display: inline-block;
+  flex: 1;
+  border-bottom: 1px solid var(--text);
+  min-width: 3rem;
+}
+
+.answer-key-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+  display: none;
+}
+
+.answer-key-section.show-on-print {
+  display: block;
+}
+
+.answer-key-title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.sample-solutions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sample-solution {
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.solution-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.solution-equation {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  word-break: break-word;
+}
+
+.solution-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ============================================================
+   ORDER BOARD GAME
+   ============================================================ */
+.game-container {
+  display: none;
+}
+
+.budget-section {
+  display: none;
+}
+
+.budget-display {
+  display: none;
+}
+
+.budget-display h2 {
+  display: none;
+}
+
+.budget-amount {
+  display: none;
+}
+
+.game-content {
+  display: none;
+}
+
+.menu-section {
+  display: none;
+}
+
+.menu-section h2 {
+  display: none;
+}
+
+.menu-grid {
+  display: none;
+}
+
+.menu-item {
+  display: none;
+}
+
+.item-name {
+  display: none;
+}
+
+.item-price {
+  display: none;
 }
 
 .order-section {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: none;
 }
 
 .order-section h2 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text);
+  display: none;
 }
 
 .order-input-area {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  display: none;
 }
 
 #order-list {
-  padding: 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 0.92rem;
-  resize: vertical;
-  min-height: 120px;
-  color: var(--text);
+  display: none;
 }
 
 #order-list:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 1px;
+  display: none;
 }
 
 .help-text {
-  font-size: 0.8rem;
-  color: var(--muted);
+  display: none;
 }
 
 .order-summary {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: none;
 }
 
 .summary-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.92rem;
-  font-weight: 600;
+  display: none;
 }
 
 .summary-row span:last-child {
-  color: var(--primary);
+  display: none;
 }
 
 .summary-row span.over-budget {
-  color: #dc2626;
-  font-weight: 700;
+  display: none;
 }
 
 .btn-success {
-  background: #16a34a;
-  color: #fff;
+  display: none;
 }
 
 .btn-success:hover {
-  background: #15803d;
+  display: none;
 }
 
 .result-message {
-  padding: 0.75rem;
-  border-radius: var(--radius);
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-align: center;
+  display: none;
 }
 
 .result-message.hidden {
   display: none;
 }
 
-.result-message.success {
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #86efac;
+/* ============================================================
+   ORDER BOARD WORKSHEET (PRINTABLE)
+   ============================================================ */
+
+.worksheet-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
 }
 
-.result-message.error {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+.worksheet-header {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text);
 }
 
-/* Responsive design */
-@media (max-width: 800px) {
-  .game-content {
-    grid-template-columns: 1fr;
-  }
-
-  .budget-amount {
-    font-size: 2rem;
-  }
-
-  .menu-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.worksheet-menu-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
 }
 
-@media (max-width: 640px) {
-  .budget-amount {
-    font-size: 1.75rem;
-  }
+.worksheet-menu-section h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
 
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.worksheet-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.worksheet-menu-item {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.ws-item-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.ws-item-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.worksheet-problem-section {
+  margin-bottom: 2rem;
+}
+
+.problem-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.budget-highlight {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.problem-instructions {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.answer-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.answer-line {
+  border-bottom: 1px solid var(--text);
+  height: 1.75rem;
+}
+
+.total-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.total-line .line {
+  display: inline-block;
+  flex: 1;
+  border-bottom: 1px solid var(--text);
+  min-width: 3rem;
+}
+
+.answer-key-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+  display: none;
+}
+
+.answer-key-section.show-on-print {
+  display: block;
+}
+
+.answer-key-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.sample-solutions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sample-solution {
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.solution-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.solution-equation {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  word-break: break-word;
+}
+
+.solution-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Remove old game container styles */
+.game-container {
+  display: none;
 }
 
 /* ============================================================
@@ -1379,8 +1605,147 @@ body {
     display: none !important;
   }
 
+  .controls-card {
+    display: none !important;
+  }
+
   body {
     background: #fff;
+  }
+
+  /* Order Board Worksheet Styles */
+  .worksheet-container {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .worksheet-header {
+    font-size: 14pt;
+    font-weight: 700;
+    margin-bottom: 0.2in;
+    text-align: center;
+  }
+
+  .worksheet-menu-section {
+    margin-bottom: 0.3in;
+    padding-bottom: 0.2in;
+    border-bottom: 2pt solid #000;
+  }
+
+  .worksheet-menu-section h2 {
+    font-size: 11pt;
+    margin-bottom: 0.1in;
+  }
+
+  .worksheet-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.15in;
+  }
+
+  .worksheet-menu-item {
+    border: 1pt solid #000;
+    padding: 0.1in;
+    font-size: 8pt;
+    text-align: center;
+  }
+
+  .ws-item-name {
+    font-weight: 600;
+    margin-bottom: 0.05in;
+  }
+
+  .ws-item-price {
+    font-size: 9pt;
+    font-weight: 700;
+  }
+
+  .worksheet-problem-section {
+    margin-bottom: 0.3in;
+  }
+
+  .problem-title {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 0.1in;
+  }
+
+  .problem-instructions {
+    font-size: 10pt;
+    margin-bottom: 0.15in;
+    line-height: 1.5;
+  }
+
+  .answer-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2in;
+    margin-bottom: 0.2in;
+  }
+
+  .answer-line {
+    height: 0.3in;
+    border-bottom: 1pt solid #000;
+  }
+
+  .total-line {
+    font-size: 10pt;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.1in;
+  }
+
+  .total-line .line {
+    flex: 1;
+    border-bottom: 1pt solid #000;
+    min-width: 2in;
+  }
+
+  .answer-key-section {
+    margin-top: 0.5in;
+    padding-top: 0.5in;
+    border-top: 2pt solid #000;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .answer-key-title {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 0.1in;
+  }
+
+  .sample-solutions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2in;
+  }
+
+  .sample-solution {
+    background: #fff;
+    border: 1pt solid #999;
+    padding: 0.1in;
+    page-break-inside: avoid;
+  }
+
+  .solution-label {
+    font-size: 8pt;
+    font-weight: 700;
+    margin-bottom: 0.05in;
+    text-transform: uppercase;
+  }
+
+  .solution-equation {
+    font-size: 9pt;
+    font-weight: 600;
+    margin-bottom: 0.05in;
+  }
+
+  .solution-note {
+    font-size: 8pt;
+    font-style: italic;
   }
 
   .output-card {
