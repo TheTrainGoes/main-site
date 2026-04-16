@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Board Math Game &mdash; Kid Sheets</title>
+  <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container">
+      <h1>Kid Sheets</h1>
+      <p>Free printable activity sheets for kids</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="no-print">
+      <a href="index.html" class="back-link">&larr; Back to Home</a>
+      <div class="page-title">
+        <h1>Order Board Math Game</h1>
+        <p>Pick a grade level and decide what to order from the menu. Try to spend as close to your budget as possible without going over!</p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-card no-print">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="grade">Grade Level</label>
+          <select id="grade"></select>
+        </div>
+
+        <div class="form-group form-group--btn">
+          <button id="random-btn" class="btn btn-primary">Random Prices</button>
+        </div>
+
+        <div class="form-group form-group--btn">
+          <button id="new-game-btn" class="btn btn-secondary">New Game</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Game Area -->
+    <div class="game-container">
+      <div class="budget-section">
+        <div class="budget-display">
+          <h2>Your Budget</h2>
+          <div class="budget-amount" id="budget-display">$0.00</div>
+        </div>
+      </div>
+
+      <div class="game-content">
+        <!-- Menu Board -->
+        <div class="menu-section">
+          <h2>Menu</h2>
+          <div class="menu-grid" id="menu-board"></div>
+        </div>
+
+        <!-- Order Section -->
+        <div class="order-section">
+          <h2>Your Order</h2>
+          <div class="order-input-area">
+            <textarea id="order-list" placeholder="Write what you want to order here, one item per line"></textarea>
+            <small class="help-text">Example: ice cream cone, sundae, slushie</small>
+          </div>
+
+          <div class="order-summary">
+            <div class="summary-row">
+              <span>Budget:</span>
+              <span id="summary-budget">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Your Total:</span>
+              <span id="summary-total">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Remaining:</span>
+              <span id="summary-remaining">$0.00</span>
+            </div>
+          </div>
+
+          <button id="calculate-btn" class="btn btn-success">Calculate My Order</button>
+
+          <div id="result-message" class="result-message hidden"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/math-order-board.js"></script>
+</body>
+</html>
