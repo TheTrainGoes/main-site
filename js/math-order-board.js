@@ -44,6 +44,28 @@ let currentBudget = BUDGET_BY_GRADE['grade2'];
 let currentPrices = {};
 
 // ============================================================
+// GRADE PROGRESSION
+// ============================================================
+
+function getItemCountForGrade(grade) {
+  switch (grade) {
+    case 'kindergarten': return 6;  // Same as grade 1 for kindergarten
+    case 'grade1': return 6;
+    case 'grade2': return 7;
+    case 'grade3': return 8;
+    case 'grade4': return 9;
+    case 'grade5': return 10;
+    case 'grade6': return 11;
+    default: return 6;
+  }
+}
+
+function getVisibleMenuItems(grade) {
+  const count = getItemCountForGrade(grade);
+  return MENU_ITEMS.slice(0, count);
+}
+
+// ============================================================
 // INITIALIZATION
 // ============================================================
 
@@ -117,10 +139,37 @@ function generateNewPrices() {
       minPrice = 100; maxPrice = 400;
   }
 
+  const visibleItems = getVisibleMenuItems(currentGrade);
+  const isGrade3Plus = ['grade3', 'grade4', 'grade5', 'grade6'].includes(currentGrade);
+
+  visibleItems.forEach(item => {
+    let price;
+    
+    if (isGrade3Plus) {
+      // Grades 3+ use non-rounded prices (like $1.99)
+      price = rand(minPrice, maxPrice);
+      // Occasionally add .99 cents for variety
+      if (Math.random() < 0.4) {
+        const dollarAmount = Math.floor(price / 100);
+        price = dollarAmount * 100 + 99;
+        if (price > maxPrice) {
+          price = dollarAmount * 100 - 1;
+        }
+      }
+    } else {
+      // Grades 1-2 use rounded prices (quarters)
+      const priceInQuarters = rand(Math.ceil(minPrice / 25), Math.floor(maxPrice / 25));
+      price = priceInQuarters * 25;
+    }
+    
+    currentPrices[item] = price;
+  });
+  
+  // Add 0 prices for items not currently displayed (so calculation still works if typed)
   MENU_ITEMS.forEach(item => {
-    // Prices are in quarters for realistic pricing
-    const priceInQuarters = rand(Math.ceil(minPrice / 25), Math.floor(maxPrice / 25));
-    currentPrices[item] = priceInQuarters * 25;
+    if (!visibleItems.includes(item)) {
+      currentPrices[item] = 0;
+    }
   });
 }
 
@@ -143,7 +192,8 @@ function updateMenuBoard() {
   const menuBoard = document.getElementById('menu-board');
   menuBoard.innerHTML = '';
 
-  MENU_ITEMS.forEach(item => {
+  const visibleItems = getVisibleMenuItems(currentGrade);
+  visibleItems.forEach(item => {
     const price = currentPrices[item];
     const card = document.createElement('div');
     card.className = 'menu-item';
