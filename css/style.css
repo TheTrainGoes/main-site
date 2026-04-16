@@ -1268,10 +1268,6 @@ body {
   display: none;
 }
 
-.answer-key-section.show-on-print {
-  display: block;
-}
-
 .answer-key-title {
   font-size: 1rem;
   font-weight: 700;
@@ -1540,10 +1536,6 @@ body {
   display: none;
 }
 
-.answer-key-section.show-on-print {
-  display: block;
-}
-
 .answer-key-title {
   font-size: 1rem;
   font-weight: 700;
@@ -1703,7 +1695,8 @@ body {
     min-width: 2in;
   }
 
-  .answer-key-section {
+  .answer-key-section.show-on-print {
+    display: block;
     margin-top: 0.5in;
     padding-top: 0.5in;
     border-top: 2pt solid #000;
