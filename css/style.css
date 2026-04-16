@@ -1252,6 +1252,7 @@ body {
   gap: 1rem;
   font-size: 0.95rem;
   font-weight: 600;
+  margin-top: 1.5rem;
 }
 
 .total-line .line {
@@ -1520,6 +1521,7 @@ body {
   gap: 1rem;
   font-size: 0.95rem;
   font-weight: 600;
+  margin-top: 1.5rem;
 }
 
 .total-line .line {
@@ -1687,6 +1689,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.1in;
+    margin-top: 0.2in;
   }
 
   .total-line .line {
