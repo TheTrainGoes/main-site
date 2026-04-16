@@ -1587,6 +1587,58 @@ body {
 }
 
 /* ============================================================
+   TELLING TIME WORKSHEET
+   ============================================================ */
+.clock-grid {
+  display: grid;
+  gap: 2rem 1.5rem;
+  justify-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.clock-problem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.clock-num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  align-self: flex-start;
+}
+
+.clock-svg {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+
+.clock-answer-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.clock-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.clock-answer-line {
+  flex: 1;
+  border-bottom: 1.5px solid var(--text);
+  min-width: 4rem;
+  height: 1.4rem;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -2041,5 +2093,29 @@ body {
     height: 0.28in;
     border: 1pt solid #bbb;
     border-radius: 2pt;
+  }
+
+  /* Telling Time worksheet print */
+  .clock-grid {
+    gap: 0.3in 0.2in;
+  }
+
+  .clock-problem { gap: 0.08in; }
+  .clock-num     { font-size: 8pt; }
+  .clock-label   { font-size: 9pt; }
+
+  .clock-answer-line {
+    height: 0.22in;
+    border-bottom: 1pt solid #000;
+  }
+
+  /* SVG size varies by column count */
+  .clock-grid[data-cols="3"] .clock-svg { width: 1.9in; height: 1.9in; }
+  .clock-grid[data-cols="4"] .clock-svg { width: 1.45in; height: 1.45in; }
+
+  .clock-svg {
+    display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
