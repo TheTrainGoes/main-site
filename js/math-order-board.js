@@ -72,6 +72,10 @@ function getVisibleMenuItems(grade) {
 function init() {
   populateGradeSelect();
   document.getElementById('generate-btn').addEventListener('click', generateWorksheet);
+  document.getElementById('answer-key-check').addEventListener('change', function () {
+    document.getElementById('answer-key').classList.toggle('show-on-print', this.checked);
+  });
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
 }
 
 function populateGradeSelect() {
@@ -96,11 +100,17 @@ function generateWorksheet() {
   currentGrade = document.getElementById('grade').value;
   currentBudget = BUDGET_BY_GRADE[currentGrade];
   generatePrices();
-  
+
   updateWorksheetHeader();
   updateWorksheetMenu();
   updateProblemBudget();
   generateSampleSolutions();
+
+  // Reset checkbox and answer key visibility, show print controls
+  const answerKeyCheck = document.getElementById('answer-key-check');
+  answerKeyCheck.checked = false;
+  document.getElementById('answer-key').classList.remove('show-on-print');
+  document.getElementById('print-controls').style.display = 'flex';
 }
 
 // ============================================================
