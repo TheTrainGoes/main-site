@@ -23,10 +23,9 @@ function blankLetters(word, grade) {
   const w = word.toLowerCase();
   const len = w.length;
 
-  // Number of blanks increases with grade / word length
+  // Number of blanks increases with difficulty / word length
   let numBlanks = 1;
-  if ((['grade3','grade4'].includes(grade) && len >= 6) ||
-      (['grade5','grade6'].includes(grade) && len >= 5)) {
+  if ((grade === 'medium' && len >= 6) || (grade === 'hard' && len >= 5)) {
     numBlanks = 2;
   }
 
@@ -100,7 +99,7 @@ LANG_GRADES.forEach(g => {
   const opt = document.createElement('option');
   opt.value = g;
   opt.textContent = GRADE_LABELS[g];
-  if (g === 'grade2') opt.selected = true;
+  if (g === 'easy') opt.selected = true;
   document.getElementById('grade').appendChild(opt);
 });
 

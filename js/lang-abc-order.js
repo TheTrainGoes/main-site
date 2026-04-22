@@ -82,7 +82,7 @@ LANG_GRADES.forEach(g => {
   const opt = document.createElement('option');
   opt.value = g;
   opt.textContent = GRADE_LABELS[g];
-  if (g === 'grade2') opt.selected = true;
+  if (g === 'easy') opt.selected = true;
   document.getElementById('grade').appendChild(opt);
 });
 

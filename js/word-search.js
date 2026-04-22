@@ -555,13 +555,12 @@ const DIFFICULTY = {
 };
 
 // ============================================================
-// GRADE CONFIG — max word length per grade
+// DIFFICULTY CONFIG — max word length per difficulty
 // ============================================================
 const GRADE_MAX_LENGTH = {
-  kindergarten: 5,
-  grade1:       7,
-  grade2:       9,
-  grade3:       Infinity
+  easy:   5,
+  medium: 9,
+  hard:   Infinity
 };
 
 // ============================================================

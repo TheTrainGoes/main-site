@@ -1,26 +1,18 @@
 'use strict';
 
 const GRADE_LABELS = {
-  kindergarten: 'Kindergarten',
-  grade1: 'Grade 1',
-  grade2: 'Grade 2',
-  grade3: 'Grade 3',
-  grade4: 'Grade 4',
-  grade5: 'Grade 5',
-  grade6: 'Grade 6'
+  easy:   'Easy',
+  medium: 'Medium',
+  hard:   'Hard'
 };
 
-const ALL_GRADES = ['kindergarten', 'grade1', 'grade2', 'grade3', 'grade4', 'grade5', 'grade6'];
+const ALL_GRADES = ['easy', 'medium', 'hard'];
 
-// Budget amounts by grade (in cents)
+// Budget amounts by difficulty (in cents)
 const BUDGET_BY_GRADE = {
-  kindergarten: 500,   // $5.00
-  grade1: 1000,        // $10.00
-  grade2: 1500,        // $15.00
-  grade3: 2000,        // $20.00
-  grade4: 2500,        // $25.00
-  grade5: 3000,        // $30.00
-  grade6: 4000         // $40.00
+  easy:   1000,   // $10.00
+  medium: 2000,   // $20.00
+  hard:   4000    // $40.00
 };
 
 // Menu items
@@ -39,8 +31,8 @@ const MENU_ITEMS = [
   'Milkshake'
 ];
 
-let currentGrade = 'grade2';
-let currentBudget = BUDGET_BY_GRADE['grade2'];
+let currentGrade = 'easy';
+let currentBudget = BUDGET_BY_GRADE['easy'];
 let currentPrices = {};
 
 // ============================================================
@@ -49,13 +41,9 @@ let currentPrices = {};
 
 function getItemCountForGrade(grade) {
   switch (grade) {
-    case 'kindergarten': return 6;
-    case 'grade1': return 6;
-    case 'grade2': return 7;
-    case 'grade3': return 8;
-    case 'grade4': return 9;
-    case 'grade5': return 10;
-    case 'grade6': return 11;
+    case 'easy':   return 6;
+    case 'medium': return 8;
+    case 'hard':   return 11;
     default: return 6;
   }
 }
@@ -126,38 +114,19 @@ function generatePrices() {
   
   let minPrice, maxPrice;
   switch (currentGrade) {
-    case 'kindergarten':
-      minPrice = 50; maxPrice = 150;
-      break;
-    case 'grade1':
-      minPrice = 100; maxPrice = 300;
-      break;
-    case 'grade2':
-      minPrice = 100; maxPrice = 400;
-      break;
-    case 'grade3':
-      minPrice = 125; maxPrice = 500;
-      break;
-    case 'grade4':
-      minPrice = 150; maxPrice = 600;
-      break;
-    case 'grade5':
-      minPrice = 200; maxPrice = 750;
-      break;
-    case 'grade6':
-      minPrice = 250; maxPrice = 1000;
-      break;
-    default:
-      minPrice = 100; maxPrice = 400;
+    case 'easy':   minPrice = 50;  maxPrice = 300;  break;
+    case 'medium': minPrice = 125; maxPrice = 600;  break;
+    case 'hard':   minPrice = 250; maxPrice = 1000; break;
+    default:       minPrice = 50;  maxPrice = 300;
   }
 
   const visibleItems = getVisibleMenuItems(currentGrade);
-  const isGrade3Plus = ['grade3', 'grade4', 'grade5', 'grade6'].includes(currentGrade);
+  const useDecimalPrices = currentGrade === 'medium' || currentGrade === 'hard';
 
   visibleItems.forEach(item => {
     let price;
     
-    if (isGrade3Plus) {
+    if (useDecimalPrices) {
       price = rand(minPrice, maxPrice);
       if (Math.random() < 0.4) {
         const dollarAmount = Math.floor(price / 100);
@@ -181,7 +150,7 @@ function generatePrices() {
 
 function updateWorksheetHeader() {
   const header = document.getElementById('worksheet-header');
-  header.innerHTML = `<strong>${GRADE_LABELS[currentGrade]}</strong> — Order Board Worksheet`;
+  header.innerHTML = `<strong>${GRADE_LABELS[currentGrade]} Difficulty</strong> — Order Board Worksheet`;
 }
 
 function updateWorksheetMenu() {

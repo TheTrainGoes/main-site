@@ -7,50 +7,45 @@
 // ============================================================
 
 const GRADE_LABELS = {
-  kindergarten: 'Kindergarten',
-  grade1: 'Grade 1',
-  grade2: 'Grade 2',
-  grade3: 'Grade 3',
-  grade4: 'Grade 4',
-  grade5: 'Grade 5',
-  grade6: 'Grade 6'
+  easy:   'Easy',
+  medium: 'Medium',
+  hard:   'Hard'
 };
 
-const LANG_GRADES = ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6'];
+const LANG_GRADES = ['easy', 'medium', 'hard'];
 
 // ── Word lists (missing letters & unscramble) ──────────────────────────────
 const LANG_WORDS = {
-  kindergarten: [
+  easy: [
+    // kindergarten words
     'cat','dog','sun','hat','run','big','red','cup','sit','hop',
     'bed','bug','nap','wet','hot','top','map','log','jam','box',
-    'fox','fit','den','van','mud','dig','pat','yam','bin','lip'
-  ],
-  grade1: [
+    'fox','fit','den','van','mud','dig','pat','yam','bin','lip',
+    // grade1 words
     'black','white','plant','smile','clean','fresh','brown','stone','cloud','snack',
     'trick','blend','shelf','chest','crisp','flash','grant','stomp','sweet','class',
     'dress','press','greet','feast','trail','wheel','chant','float','brave','spell'
   ],
-  grade2: [
+  medium: [
+    // grade2 words
     'garden','basket','winter','summer','pretty','bright','simple','follow','better','hurry',
     'quiet','strong','laugh','watch','learn','carry','whole','alarm','catch','magic',
-    'storm','until','vivid','lucky','patch','orbit','nerve','ghost','drift','early'
-  ],
-  grade3: [
+    'storm','until','vivid','lucky','patch','orbit','nerve','ghost','drift','early',
+    // grade3 words
     'because','careful','million','whether','hundred','problem','perhaps','moment','certain','strange',
     'travel','believe','hungry','puzzle','ribbon','silver','tender','unless','valley','wander',
     'frozen','pillow','gather','circle','bottle','famous','gentle','insect','jungle','mirror'
   ],
-  grade4: [
+  hard: [
+    // grade4 words
     'ancient','journey','measure','respect','protect','surface','opinion','courage','explore','pattern',
     'freedom','reflect','climate','curious','harvest','inspire','mystery','network','outcome','patient',
-    'balance','chapter','current','distant','express','grammar','history','imagine','lantern','perfect'
-  ],
-  grade5: [
+    'balance','chapter','current','distant','express','grammar','history','imagine','lantern','perfect',
+    // grade5 words
     'absolute','argument','cautious','dedicate','emphasis','flexible','generous','hesitate','judgment','knowledge',
     'language','moderate','negative','obstacle','patience','quantity','relevant','strategy','tolerant','universe',
-    'brilliant','classical','decisive','enormous','faithful','grateful','horrible','innocent','jealousy','merchant'
-  ],
-  grade6: [
+    'brilliant','classical','decisive','enormous','faithful','grateful','horrible','innocent','jealousy','merchant',
+    // grade6 words
     'accomplish','beneficial','comprehend','demonstrate','elaborate','fundamental','illuminate','magnificent','negligence','persevere',
     'punctuate','recognize','significant','thoroughly','understand','vocabulary','wilderness','admirable','civilized','competence',
     'appreciate','correspond','dependable','frequently','government','historical','incredible','legitimate','memorable','objective'
@@ -60,7 +55,8 @@ const LANG_WORDS = {
 // ── Fill-in-the-blank sentences ────────────────────────────────────────────
 // Each entry: { text: 'sentence with ___ for blank', answer: 'word' }
 const LANG_SENTENCES = {
-  kindergarten: [
+  easy: [
+    // kindergarten sentences
     { text: 'The ___ makes it warm outside.',          answer: 'sun' },
     { text: 'My ___ likes to fetch the ball.',         answer: 'dog' },
     { text: 'I wear a ___ on my head.',                answer: 'hat' },
@@ -90,9 +86,8 @@ const LANG_SENTENCES = {
     { text: 'We eat ___ at Thanksgiving.',             answer: 'yam' },
     { text: 'Put the cans in the recycling ___.',      answer: 'bin' },
     { text: 'My new shoes ___ my feet perfectly.',     answer: 'fit' },
-    { text: 'She put balm on her dry ___.',            answer: 'lip' }
-  ],
-  grade1: [
+    { text: 'She put balm on her dry ___.',            answer: 'lip' },
+    // grade1 sentences
     { text: 'I water my ___ every morning.',                      answer: 'plant' },
     { text: 'She had a big ___ on her face.',                     answer: 'smile' },
     { text: 'Please keep your room neat and ___.',                answer: 'clean' },
@@ -124,7 +119,8 @@ const LANG_SENTENCES = {
     { text: 'Put the book back on the ___ when you finish.',      answer: 'shelf' },
     { text: 'The autumn air was cool and ___.',                   answer: 'crisp' }
   ],
-  grade2: [
+  medium: [
+    // grade2 sentences
     { text: 'Mom grows tomatoes in our ___ out back.',            answer: 'garden' },
     { text: 'She carried a ___ full of fresh fruit.',             answer: 'basket' },
     { text: 'We love to build snowmen in the ___.',               answer: 'winter' },
@@ -154,9 +150,8 @@ const LANG_SENTENCES = {
     { text: 'She had the ___ to go on stage alone.',              answer: 'nerve' },
     { text: 'He dressed as a ___ for Halloween.',                 answer: 'ghost' },
     { text: 'I watched the clouds ___ across the sky.',           answer: 'drift' },
-    { text: 'She likes to wake up ___ every morning.',            answer: 'early' }
-  ],
-  grade3: [
+    { text: 'She likes to wake up ___ every morning.',            answer: 'early' },
+    // grade3 sentences
     { text: 'I stayed inside ___ it was raining.',               answer: 'because' },
     { text: 'Be ___ when you cross the busy street.',            answer: 'careful' },
     { text: 'There are ___ cents in a dollar.',                  answer: 'hundred' },
@@ -188,7 +183,8 @@ const LANG_SENTENCES = {
     { text: 'There are ___ of reasons to be kind.',           answer: 'million' },
     { text: 'The ___ chick stayed close to its mother.',       answer: 'tender' }
   ],
-  grade4: [
+  hard: [
+    // grade4 sentences
     { text: 'Egypt is home to many ___ pyramids.',                    answer: 'ancient' },
     { text: 'The explorers began their long ___ at dawn.',            answer: 'journey' },
     { text: 'Use a ruler to ___ the length of the paper.',            answer: 'measure' },
@@ -218,9 +214,8 @@ const LANG_SENTENCES = {
     { text: 'Close your eyes and ___ you are on a beach.',            answer: 'imagine' },
     { text: 'We hung a glowing ___ outside the tent.',                answer: 'lantern' },
     { text: 'She practiced until her routine was ___.',               answer: 'perfect' },
-    { text: 'The swimmer fought against the strong ocean ___.',       answer: 'current' }
-  ],
-  grade5: [
+    { text: 'The swimmer fought against the strong ocean ___.',       answer: 'current' },
+    // grade5 sentences
     { text: 'The judge had ___ authority in the courtroom.',          answer: 'absolute' },
     { text: 'They had an ___ about whose turn it was.',               answer: 'argument' },
     { text: 'Be ___ when walking near the edge of the cliff.',        answer: 'cautious' },
@@ -250,9 +245,8 @@ const LANG_SENTENCES = {
     { text: 'The weather was ___ during the hurricane.',              answer: 'horrible' },
     { text: 'The jury decided that the defendant was ___.',           answer: 'innocent' },
     { text: 'She tried not to let ___ ruin her friendship.',          answer: 'jealousy' },
-    { text: 'The ___ sold spices and silks from across the land.',    answer: 'merchant' }
-  ],
-  grade6: [
+    { text: 'The ___ sold spices and silks from across the land.',    answer: 'merchant' },
+    // grade6 sentences
     { text: 'With hard work, you can ___ anything you set your mind to.',   answer: 'accomplish' },
     { text: 'Exercise is ___ to both the body and the mind.',               answer: 'beneficial' },
     { text: 'Read the passage again until you fully ___ the meaning.',      answer: 'comprehend' },
@@ -289,92 +283,71 @@ const LANG_SENTENCES = {
 // ── Synonym and antonym pairs ──────────────────────────────────────────────
 // Each entry: [word, partner] — always lowercase
 const LANG_PAIRS = {
-  kindergarten: {
+  easy: {
     antonyms: [
+      // kindergarten
       ['big','small'],   ['hot','cold'],   ['fast','slow'],  ['happy','sad'],
       ['up','down'],     ['in','out'],     ['wet','dry'],    ['old','new'],
       ['hard','soft'],   ['day','night'],  ['on','off'],     ['yes','no'],
-      ['stop','go'],     ['top','bottom'], ['front','back']
-    ],
-    synonyms: [
-      ['big','large'],    ['small','tiny'],   ['fast','quick'],  ['happy','glad'],
-      ['cold','chilly'],  ['shout','yell'],   ['pretty','nice'], ['jump','leap'],
-      ['begin','start'],  ['friend','pal'],   ['look','see'],    ['sick','ill'],
-      ['scared','afraid'],['funny','silly'],  ['smart','clever']
-    ]
-  },
-  grade1: {
-    antonyms: [
+      ['stop','go'],     ['top','bottom'], ['front','back'],
+      // grade1
       ['loud','quiet'],  ['open','close'],  ['light','dark'],  ['clean','dirty'],
       ['near','far'],    ['brave','scared'],['full','empty'],  ['smile','frown'],
       ['smooth','rough'],['high','low'],    ['early','late'],  ['first','last'],
       ['strong','weak'], ['true','false'],  ['right','wrong']
     ],
     synonyms: [
+      // kindergarten
+      ['big','large'],    ['small','tiny'],   ['fast','quick'],  ['happy','glad'],
+      ['cold','chilly'],  ['shout','yell'],   ['pretty','nice'], ['jump','leap'],
+      ['begin','start'],  ['friend','pal'],   ['look','see'],    ['sick','ill'],
+      ['scared','afraid'],['funny','silly'],  ['smart','clever'],
+      // grade1
       ['angry','mad'],   ['tired','sleepy'], ['smart','clever'],['funny','silly'],
       ['cold','freezing'],['sick','ill'],    ['talk','speak'],  ['road','street'],
       ['stone','rock'],  ['happy','joyful'], ['fast','rapid'],  ['sad','upset'],
       ['brave','bold'],  ['clean','neat'],   ['big','huge']
     ]
   },
-  grade2: {
+  medium: {
     antonyms: [
+      // grade2
       ['found','lost'],     ['correct','wrong'],   ['always','never'],   ['remember','forget'],
       ['appear','vanish'],  ['strong','weak'],     ['question','answer'],['arrive','depart'],
       ['accept','refuse'],  ['reward','punish'],   ['brave','cowardly'], ['kind','cruel'],
-      ['begin','finish'],   ['ancient','modern'],  ['bright','dull']
-    ],
-    synonyms: [
-      ['brave','courageous'], ['begin','start'],     ['tired','exhausted'],  ['happy','joyful'],
-      ['kind','gentle'],      ['strange','unusual'], ['large','enormous'],   ['fast','speedy'],
-      ['scared','terrified'], ['cold','frigid'],     ['smart','intelligent'],['pretty','beautiful'],
-      ['angry','furious'],    ['quiet','silent'],    ['sad','sorrowful']
-    ]
-  },
-  grade3: {
-    antonyms: [
+      ['begin','finish'],   ['ancient','modern'],  ['bright','dull'],
+      // grade3
       ['victory','defeat'],    ['ancient','modern'],   ['noisy','peaceful'],  ['ordinary','special'],
       ['hostile','friendly'],  ['certain','uncertain'],['generous','selfish'],['bright','dim'],
       ['positive','negative'], ['expand','shrink'],    ['valuable','worthless'],['true','false'],
       ['success','failure'],   ['careful','careless'], ['hungry','full']
     ],
     synonyms: [
+      // grade2
+      ['brave','courageous'], ['begin','start'],     ['tired','exhausted'],  ['happy','joyful'],
+      ['kind','gentle'],      ['strange','unusual'], ['large','enormous'],   ['fast','speedy'],
+      ['scared','terrified'], ['cold','frigid'],     ['smart','intelligent'],['pretty','beautiful'],
+      ['angry','furious'],    ['quiet','silent'],    ['sad','sorrowful'],
+      // grade3
       ['brave','courageous'],  ['calm','peaceful'],   ['strange','peculiar'],  ['clever','intelligent'],
       ['ancient','old'],       ['happy','delighted'], ['sad','miserable'],     ['tired','exhausted'],
       ['angry','furious'],     ['cold','frigid'],     ['kind','generous'],     ['big','enormous'],
       ['fast','rapid'],        ['begin','commence'],  ['small','miniature']
     ]
   },
-  grade4: {
+  hard: {
     antonyms: [
+      // grade4
       ['permanent','temporary'],['reveal','conceal'], ['generous','selfish'],  ['flexible','rigid'],
       ['loyal','disloyal'],     ['natural','artificial'],['expand','contract'],['courage','cowardice'],
       ['ascend','descend'],     ['innocent','guilty'], ['knowledge','ignorance'],['ancient','modern'],
-      ['triumph','defeat'],     ['protect','endanger'],['inspire','discourage']
-    ],
-    synonyms: [
-      ['brave','valiant'],    ['happy','elated'],    ['sad','melancholy'],  ['angry','furious'],
-      ['smart','ingenious'],  ['tired','fatigued'],  ['begin','initiate'],  ['end','conclude'],
-      ['big','colossal'],     ['small','minute'],    ['fast','swift'],      ['slow','sluggish'],
-      ['kind','benevolent'],  ['strange','peculiar'],['honest','truthful']
-    ]
-  },
-  grade5: {
-    antonyms: [
+      ['triumph','defeat'],     ['protect','endanger'],['inspire','discourage'],
+      // grade5
       ['abundant','scarce'],     ['diligent','lazy'],        ['optimistic','pessimistic'], ['flexible','rigid'],
       ['humble','arrogant'],     ['generous','stingy'],      ['courage','cowardice'],      ['ancient','contemporary'],
       ['beneficial','harmful'],  ['strengthen','weaken'],    ['wisdom','foolishness'],     ['tolerant','intolerant'],
-      ['cautious','reckless'],   ['success','failure'],      ['transparent','opaque']
-    ],
-    synonyms: [
-      ['brave','valiant'],    ['clever','astute'],   ['happy','ecstatic'],   ['angry','indignant'],
-      ['begin','initiate'],   ['strange','peculiar'],['honest','candid'],    ['tired','weary'],
-      ['kind','benevolent'],  ['stop','cease'],      ['famous','renowned'],  ['difficult','arduous'],
-      ['small','minuscule'],  ['generous','magnanimous'],['patient','steadfast']
-    ]
-  },
-  grade6: {
-    antonyms: [
+      ['cautious','reckless'],   ['success','failure'],      ['transparent','opaque'],
+      // grade6
       ['benevolent','malevolent'], ['significant','trivial'],  ['transparent','opaque'],
       ['authentic','counterfeit'], ['abundant','scarce'],      ['optimistic','pessimistic'],
       ['elaborate','simplistic'],  ['prominent','obscure'],    ['diligent','negligent'],
@@ -382,6 +355,17 @@ const LANG_PAIRS = {
       ['persistent','inconsistent'],['beneficial','detrimental'],['admirable','contemptible']
     ],
     synonyms: [
+      // grade4
+      ['brave','valiant'],    ['happy','elated'],    ['sad','melancholy'],  ['angry','furious'],
+      ['smart','ingenious'],  ['tired','fatigued'],  ['begin','initiate'],  ['end','conclude'],
+      ['big','colossal'],     ['small','minute'],    ['fast','swift'],      ['slow','sluggish'],
+      ['kind','benevolent'],  ['strange','peculiar'],['honest','truthful'],
+      // grade5
+      ['brave','valiant'],    ['clever','astute'],   ['happy','ecstatic'],   ['angry','indignant'],
+      ['begin','initiate'],   ['strange','peculiar'],['honest','candid'],    ['tired','weary'],
+      ['kind','benevolent'],  ['stop','cease'],      ['famous','renowned'],  ['difficult','arduous'],
+      ['small','minuscule'],  ['generous','magnanimous'],['patient','steadfast'],
+      // grade6
       ['admirable','commendable'],  ['comprehend','understand'], ['fundamental','essential'],
       ['magnificent','splendid'],   ['persevere','persist'],     ['significant','substantial'],
       ['beneficial','advantageous'],['accomplish','achieve'],    ['elaborate','intricate'],
