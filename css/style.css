@@ -2256,6 +2256,33 @@ body {
   break-before: page;
 }
 
+.map-answer-section {
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.map-answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 2rem;
+}
+
+.map-answer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.map-answer-num {
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.map-answer-row .answer-line {
+  flex: 1;
+}
+
 /* ============================================================
    PRINT STYLES
    ============================================================ */

@@ -13,32 +13,32 @@ function oceanLabel(x, y, letter) {
 }
 
 function buildWorldContinents() {
-  return `<svg viewBox="0 0 1500 740" xmlns="http://www.w3.org/2000/svg" class="sci-svg sci-svg--world">
-<image href="images/maps/world-continents.png" x="0" y="0" width="1500" height="740"/>
-${mapCallout(284, 160, 1)}   <!-- North America -->
-${mapCallout(427, 374, 2)}   <!-- South America -->
-${mapCallout(694, 142, 3)}   <!-- Europe -->
-${mapCallout(712, 303, 4)}   <!-- Africa -->
-${mapCallout(961, 160, 5)}   <!-- Asia -->
-${mapCallout(1121, 409, 6)}  <!-- Australia -->
-${mapCallout(750, 587, 7)}   <!-- Antarctica -->
-${oceanLabel(107, 320, 'A')} <!-- Pacific Ocean -->
-${oceanLabel(534, 320, 'B')} <!-- Atlantic Ocean -->
-${oceanLabel(926, 392, 'C')} <!-- Indian Ocean -->
-${oceanLabel(750, 60, 'D')}  <!-- Arctic Ocean -->
+  return `<svg viewBox="0 0 1280 712" xmlns="http://www.w3.org/2000/svg" class="sci-svg sci-svg--world">
+<image href="images/maps/world-continents.png" x="0" y="0" width="1280" height="712"/>
+${mapCallout(250, 200, 1)}   <!-- North America -->
+${mapCallout(400, 480, 2)}   <!-- South America -->
+${mapCallout(650, 160, 3)}   <!-- Europe -->
+${mapCallout(680, 420, 4)}   <!-- Africa -->
+${mapCallout(920, 200, 5)}   <!-- Asia -->
+${mapCallout(1050, 520, 6)}  <!-- Australia -->
+${mapCallout(640, 690, 7)}   <!-- Antarctica -->
+${oceanLabel(100, 350, 'A')} <!-- Pacific Ocean -->
+${oceanLabel(500, 350, 'B')} <!-- Atlantic Ocean -->
+${oceanLabel(880, 480, 'C')} <!-- Indian Ocean -->
+${oceanLabel(640, 40, 'D')}  <!-- Arctic Ocean -->
 </svg>`;
 }
 
 function buildNorthAmerica() {
-  return `<svg viewBox="0 0 453 600" xmlns="http://www.w3.org/2000/svg" class="sci-svg sci-svg--medium">
-<image href="images/maps/north-america.png" x="0" y="0" width="453" height="600"/>
-${mapCallout(226, 150, 1)}   <!-- Canada -->
-${mapCallout(60, 100, 2)}    <!-- Alaska -->
-${mapCallout(430, 120, 3)}   <!-- Greenland -->
-${mapCallout(280, 350, 4)}   <!-- United States -->
-${mapCallout(200, 450, 5)}   <!-- Mexico -->
-${mapCallout(320, 420, 6)}   <!-- Cuba -->
-${mapCallout(240, 500, 7)}   <!-- Central America -->
+  return `<svg viewBox="0 0 1876 1964" xmlns="http://www.w3.org/2000/svg" class="sci-svg sci-svg--medium">
+<image href="images/maps/north-america.png" x="0" y="0" width="1876" height="1964"/>
+${mapCallout(950, 550, 1)}    <!-- Canada -->
+${mapCallout(200, 450, 2)}    <!-- Alaska -->
+${mapCallout(1750, 450, 3)}   <!-- Greenland -->
+${mapCallout(1020, 1250, 4)}  <!-- United States -->
+${mapCallout(850, 1650, 5)}   <!-- Mexico -->
+${mapCallout(1250, 1550, 6)}  <!-- Cuba -->
+${mapCallout(950, 1850, 7)}   <!-- Central America -->
 </svg>`;
 }
 
@@ -56,6 +56,20 @@ const MAPS = {
     svg: buildNorthAmerica
   }
 };
+
+function buildAnswerLines(numbered, lettered) {
+  let html = '<div class="map-answer-grid">';
+  const allLabels = [...numbered, ...lettered.map((l, i) => `${String.fromCharCode(65 + i)}`).map((letter, i) => letter)];
+  const labelList = [...numbered, ...lettered];
+
+  labelList.forEach((label, i) => {
+    const num = i < numbered.length ? (i + 1) : String.fromCharCode(65 + i - numbered.length);
+    html += `<div class="map-answer-row"><span class="map-answer-num">${num}.</span><div class="answer-line"></div></div>`;
+  });
+
+  html += '</div>';
+  return html;
+}
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -88,6 +102,8 @@ function generate() {
   bankLabels.forEach(l => { bankHtml += `<span class="sci-bank-word">${l}</span>`; });
   bankHtml += '</div>';
   bankEl.innerHTML = bankHtml;
+
+  document.getElementById('map-answer-lines').innerHTML = buildAnswerLines(def.numbered, def.lettered);
 
   let akHtml = '<div class="answer-key-header"><h2>Answer Key</h2><p>' + def.title + '</p></div>';
   akHtml += '<div class="lang-answer-grid">';
