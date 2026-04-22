@@ -109,6 +109,7 @@ function generate() {
   const month = parseInt(document.getElementById('cal-month').value);
   const year = parseInt(document.getElementById('cal-year').value);
   const weekStart = parseInt(document.getElementById('week-start').value);
+  const landscape = document.getElementById('landscape-print').checked;
 
   const title = MONTH_NAMES[month] + ' ' + year;
   document.getElementById('cal-title').textContent =
@@ -123,7 +124,13 @@ function generate() {
     body.appendChild(generateWeekly(month, year, weekStart));
   }
 
-  document.getElementById('output').classList.remove('hidden');
+  const outputEl = document.getElementById('output');
+  outputEl.classList.remove('hidden');
+  if (landscape) {
+    outputEl.classList.add('landscape-print');
+  } else {
+    outputEl.classList.remove('landscape-print');
+  }
 }
 
 // Pre-select current month
