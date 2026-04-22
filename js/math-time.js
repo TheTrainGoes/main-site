@@ -1,10 +1,9 @@
 'use strict';
 
 const GRADE_CONFIG = {
-  kindergarten: { label: 'Kindergarten', minuteOptions: [0] },
-  grade1:       { label: 'Grade 1',      minuteOptions: [0, 30] },
-  grade2:       { label: 'Grade 2',      minuteOptions: [0, 15, 30, 45] },
-  grade3:       { label: 'Grade 3',      minuteOptions: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] },
+  easy:   { label: 'Easy',   minuteOptions: [0, 30] },
+  medium: { label: 'Medium', minuteOptions: [0, 10, 20, 30, 40, 50] },
+  hard:   { label: 'Hard',   minuteOptions: Array.from({ length: 60 }, (_, i) => i) },
 };
 
 function rand(min, max) {
@@ -12,8 +11,8 @@ function rand(min, max) {
 }
 
 // Build a de-duplicated, shuffled list of times for the given grade and count.
-function generateTimes(grade, count) {
-  const { minuteOptions } = GRADE_CONFIG[grade];
+function generateTimes(difficulty, count) {
+  const { minuteOptions } = GRADE_CONFIG[difficulty];
   const pool = [];
   for (let h = 1; h <= 12; h++) {
     for (const m of minuteOptions) {
@@ -150,7 +149,7 @@ function buildProblemEl(idx, time) {
 // UI
 // ============================================================
 
-const gradeEl        = document.getElementById('grade');
+const gradeEl        = document.getElementById('difficulty');
 const countEl        = document.getElementById('count');
 const genBtn         = document.getElementById('generate-btn');
 const outputEl       = document.getElementById('output');
@@ -164,9 +163,9 @@ const answerTitleEl  = document.getElementById('answer-key-title');
 const answerKeyCheck = document.getElementById('answer-key-check');
 
 function generate() {
-  const grade = gradeEl.value;
+  const difficulty = gradeEl.value;
   const count = parseInt(countEl.value, 10);
-  const { label } = GRADE_CONFIG[grade];
+  const { label } = GRADE_CONFIG[difficulty];
 
   // 6 → 3 cols (2 rows), 9 → 3 cols (3 rows), 12 → 4 cols (3 rows)
   const cols = count === 12 ? 4 : 3;
@@ -180,7 +179,7 @@ function generate() {
   gridEl.dataset.cols = cols;
   answerGridEl.innerHTML = '';
 
-  const times = generateTimes(grade, count);
+  const times = generateTimes(difficulty, count);
 
   times.forEach((time, i) => {
     gridEl.appendChild(buildProblemEl(i + 1, time));
