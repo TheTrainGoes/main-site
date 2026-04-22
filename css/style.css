@@ -1769,6 +1769,63 @@ body {
 }
 
 /* ============================================================
+   NUMBER PATTERNS WORKSHEET
+   ============================================================ */
+
+.np-grid {
+  display: grid;
+  gap: 0.85rem 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.np-problem {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.15rem;
+}
+
+.np-num {
+  min-width: 2ch;
+  font-size: 0.72em;
+  color: var(--muted);
+  align-self: flex-start;
+  padding-top: 0.15em;
+  flex-shrink: 0;
+}
+
+.np-seq {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.np-term {
+  font-weight: 700;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.np-sep {
+  color: var(--muted);
+}
+
+.np-blank {
+  display: inline-block;
+  width: 2.75rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.np-rule {
+  font-size: 0.85em;
+  color: var(--muted);
+  margin-left: 0.35rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -2291,6 +2348,27 @@ body {
   }
 
   .meas-answer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Number Patterns worksheet print */
+  .np-grid {
+    gap: 0.25in 0.3in;
+  }
+
+  .np-problem {
+    font-size: 13pt;
+    gap: 0.09in;
+  }
+
+  .np-num { font-size: 9pt; }
+
+  .np-blank {
+    width: 0.75in;
+    border-bottom: 1pt solid #000;
+  }
+
+  .np-answer-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
