@@ -148,16 +148,6 @@ function canPlace(grid, word, row, col, dir, firstWord) {
       if (cell.letter !== word[i]) return false;  // letter mismatch
       if (cell.dirs.has(dir))      return false;  // same-direction overlap
       intersections++;
-    } else {
-      // Empty cell: adjacent cells perpendicular to the word direction must be empty
-      // to avoid creating unintended words
-      if (dir === ACROSS) {
-        if (r > 0        && grid[r - 1][c] !== null) return false;
-        if (r < size - 1 && grid[r + 1][c] !== null) return false;
-      } else {
-        if (c > 0        && grid[r][c - 1] !== null) return false;
-        if (c < size - 1 && grid[r][c + 1] !== null) return false;
-      }
     }
   }
 
@@ -305,36 +295,32 @@ function renderGrid(grid, numbering, showAnswers) {
 }
 
 function buildClueItems(placed, dir, showAnswers) {
-  const frag = document.createDocumentFragment();
-  const items = placed
+  return placed
     .filter(p => p.dir === dir && p.number != null)
-    .sort((a, b) => a.number - b.number);
+    .sort((a, b) => a.number - b.number)
+    .map(p => {
+      const li = document.createElement('li');
+      li.className = 'cw-clue-item';
 
-  for (const p of items) {
-    const li = document.createElement('li');
-    li.className = 'cw-clue-item';
+      const numSpan = document.createElement('span');
+      numSpan.className = 'cw-clue-num';
+      numSpan.textContent = p.number + '.';
 
-    const numSpan = document.createElement('span');
-    numSpan.className = 'cw-clue-num';
-    numSpan.textContent = p.number + '.';
+      const textSpan = document.createElement('span');
+      textSpan.className = 'cw-clue-text';
+      textSpan.textContent = p.clue;
 
-    const textSpan = document.createElement('span');
-    textSpan.className = 'cw-clue-text';
-    textSpan.textContent = p.clue;
+      if (showAnswers) {
+        const ansSpan = document.createElement('span');
+        ansSpan.className = 'cw-clue-answer';
+        ansSpan.textContent = ' (' + p.word + ')';
+        textSpan.appendChild(ansSpan);
+      }
 
-    if (showAnswers) {
-      const ansSpan = document.createElement('span');
-      ansSpan.className = 'cw-clue-answer';
-      ansSpan.textContent = ' (' + p.word + ')';
-      textSpan.appendChild(ansSpan);
-    }
-
-    li.appendChild(numSpan);
-    li.appendChild(textSpan);
-    frag.appendChild(li);
-  }
-
-  return frag;
+      li.appendChild(numSpan);
+      li.appendChild(textSpan);
+      return li;
+    });
 }
 
 function generate() {
@@ -369,13 +355,13 @@ function generate() {
 
   // Puzzle
   document.getElementById('cw-grid-wrapper').replaceChildren(renderGrid(grid, numbering, false));
-  document.getElementById('cw-across-list').replaceChildren(buildClueItems(placed, ACROSS, false));
-  document.getElementById('cw-down-list').replaceChildren(buildClueItems(placed, DOWN, false));
+  document.getElementById('cw-across-list').replaceChildren(...buildClueItems(placed, ACROSS, false));
+  document.getElementById('cw-down-list').replaceChildren(...buildClueItems(placed, DOWN, false));
 
   // Answer key
   document.getElementById('cw-answer-grid-wrapper').replaceChildren(renderGrid(grid, numbering, true));
-  document.getElementById('cw-answer-across-list').replaceChildren(buildClueItems(placed, ACROSS, true));
-  document.getElementById('cw-answer-down-list').replaceChildren(buildClueItems(placed, DOWN, true));
+  document.getElementById('cw-answer-across-list').replaceChildren(...buildClueItems(placed, ACROSS, true));
+  document.getElementById('cw-answer-down-list').replaceChildren(...buildClueItems(placed, DOWN, true));
 
   document.getElementById('output').classList.remove('hidden');
 

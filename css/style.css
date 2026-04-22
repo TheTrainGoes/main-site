@@ -1952,8 +1952,8 @@ body {
 
 .cw-grid {
   display: inline-grid;
+  grid-auto-rows: 36px;
   border: 2px solid #222;
-  line-height: 0;
 }
 
 .cw-cell {
