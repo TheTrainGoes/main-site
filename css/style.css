@@ -2048,6 +2048,215 @@ body {
 }
 
 /* ============================================================
+   WRITING PROMPTS
+   ============================================================ */
+.wp-prompt-box {
+  background: #EFF6FF;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.wp-header-fields {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+.wp-field {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.wp-underline {
+  display: inline-block;
+  border-bottom: 1.5px solid var(--text);
+}
+
+.wp-underline--long  { width: 10rem; }
+.wp-underline--short { width: 6rem; }
+
+.wp-lines { display: flex; flex-direction: column; }
+
+.wp-line-row {
+  height: 2.25rem;
+  border-bottom: 1.5px solid #CBD5E1;
+}
+
+/* ============================================================
+   CALENDAR / PLANNER
+   ============================================================ */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+.cal-header-cell {
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-day-cell {
+  min-height: 4.5rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.25rem 0.35rem;
+  vertical-align: top;
+}
+
+.cal-day-empty { background: var(--bg); }
+
+.cal-day-num {
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: block;
+}
+
+/* Weekly planner */
+.cal-weekly-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cal-week-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cal-week-label {
+  background: var(--bg);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-week-day {
+  padding: 0.3rem 0.4rem;
+  border-right: 1px solid var(--border);
+}
+
+.cal-week-day:last-child { border-right: none; }
+
+.cal-week-day-name {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.cal-week-day-num {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0.1rem;
+}
+
+.cal-week-lines { display: flex; flex-direction: column; }
+
+.cal-week-line-row {
+  height: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   SCIENCE LABELING & MAPS
+   ============================================================ */
+.sci-worksheet-header {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sci-diagram {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.sci-svg {
+  width: 100%;
+  max-width: 860px;
+  height: auto;
+  display: block;
+}
+
+.sci-svg--medium {
+  max-width: 600px;
+}
+
+.sci-svg--world {
+  max-width: 900px;
+}
+
+.sci-word-bank {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: var(--bg);
+}
+
+.sci-bank-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.sci-bank-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+}
+
+.sci-bank-word {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.sci-answer-key {
+  display: none;
+}
+
+.sci-answer-key.show-on-print {
+  display: block;
+  page-break-before: always;
+  break-before: page;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -2743,5 +2952,127 @@ body {
     color: #2f4ac2 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  /* Writing Prompts print */
+  .wp-prompt-box {
+    background: #EFF6FF !important;
+    border: 1.5pt solid #3b5bdb;
+    padding: 0.15in 0.2in;
+    margin-bottom: 0.15in;
+    font-size: 11pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .wp-header-fields {
+    margin-bottom: 0.15in;
+    gap: 1.5in;
+  }
+
+  .wp-field { font-size: 10pt; }
+  .wp-underline--long  { width: 2in; }
+  .wp-underline--short { width: 1.2in; }
+  .wp-underline { border-bottom: 1pt solid #000; }
+
+  .wp-line-row {
+    height: 0.32in;
+    border-bottom: 1pt solid #CBD5E1;
+  }
+
+  /* Calendar / Planner print */
+  .cal-grid {
+    border-left: 0.75pt solid #aaa;
+    border-top: 0.75pt solid #aaa;
+  }
+
+  .cal-header-cell {
+    padding: 0.05in;
+    font-size: 7pt;
+    background: #f4f4f4 !important;
+    border-right: 0.75pt solid #aaa;
+    border-bottom: 0.75pt solid #aaa;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cal-day-cell {
+    min-height: 0.72in;
+    border-right: 0.75pt solid #aaa;
+    border-bottom: 0.75pt solid #aaa;
+    padding: 0.04in;
+  }
+
+  .cal-day-empty {
+    background: #f9f9f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cal-day-num { font-size: 9pt; }
+
+  .cal-week-block {
+    border: 0.75pt solid #aaa;
+    break-inside: avoid;
+  }
+
+  .cal-week-label {
+    font-size: 7pt;
+    padding: 0.04in 0.1in;
+    background: #f4f4f4 !important;
+    border-bottom: 0.75pt solid #aaa;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cal-week-days {
+    border-bottom: 0.75pt solid #aaa;
+  }
+
+  .cal-week-day {
+    padding: 0.04in 0.06in;
+    border-right: 0.75pt solid #aaa;
+  }
+
+  .cal-week-day-name { font-size: 6.5pt; }
+  .cal-week-day-num  { font-size: 9pt; }
+
+  .cal-week-line-row {
+    height: 0.25in;
+    border-bottom: 0.75pt solid #ddd;
+  }
+
+  /* Science labeling & maps print */
+  .sci-worksheet-header {
+    margin-bottom: 0.12in;
+    gap: 1.5in;
+  }
+
+  .sci-diagram {
+    margin-bottom: 0.15in;
+  }
+
+  .sci-svg {
+    width: 100%;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sci-word-bank {
+    background: #f4f4f4 !important;
+    border: 0.75pt solid #aaa;
+    padding: 0.08in 0.12in;
+    margin-bottom: 0.12in;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sci-bank-title { font-size: 7.5pt; margin-bottom: 0.06in; }
+  .sci-bank-word  { font-size: 10pt; }
+
+  .sci-answer-key.show-on-print {
+    display: block;
+    page-break-before: always;
+    break-before: page;
   }
 }

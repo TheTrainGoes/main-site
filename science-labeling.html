@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Science Labeling &mdash; Kid Sheets</title>
+  <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container">
+      <h1>Kid Sheets</h1>
+      <p>Free printable activity sheets for kids</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="no-print">
+      <a href="index.html" class="back-link">&larr; Back to Home</a>
+      <div class="page-title">
+        <h1>Science Labeling</h1>
+        <p>Choose a diagram and label its parts using the word bank.</p>
+      </div>
+    </div>
+
+    <div class="controls-card no-print">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="topic">Topic</label>
+          <select id="topic">
+            <option value="solar-system">Solar System</option>
+            <option value="plant-parts">Plant Parts</option>
+            <option value="water-cycle">Water Cycle</option>
+            <option value="human-body">Human Body</option>
+          </select>
+        </div>
+        <div class="form-group form-group--btn">
+          <button id="generate-btn" class="btn btn-primary">Generate</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="output" class="output-card hidden">
+      <div class="puzzle-header">
+        <h2 id="sci-title"></h2>
+        <p>Label each numbered part using the word bank below.</p>
+      </div>
+
+      <div class="sci-worksheet-header">
+        <div class="wp-field">Name: <span class="wp-underline wp-underline--long"></span></div>
+        <div class="wp-field">Date: <span class="wp-underline wp-underline--short"></span></div>
+      </div>
+
+      <div id="sci-diagram" class="sci-diagram"></div>
+
+      <div id="sci-word-bank" class="sci-word-bank"></div>
+
+      <div id="sci-answer-key" class="sci-answer-key answer-key"></div>
+
+      <div class="output-actions no-print">
+        <label class="answer-key-label">
+          <input type="checkbox" id="answer-key-check"> Print answer key on second page
+        </label>
+        <button id="print-btn" class="btn btn-secondary">Print / Save as PDF</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/science-labeling.js"></script>
+</body>
+</html>
