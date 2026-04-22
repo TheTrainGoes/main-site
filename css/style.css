@@ -536,6 +536,89 @@ body {
   min-width: 4rem;
 }
 
+/* ============================================================
+   FRACTIONS WORKSHEET
+   ============================================================ */
+
+.fraction-problems-grid {
+  display: grid;
+  gap: 2.5rem 2rem;
+}
+
+.frac-problem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.4rem;
+}
+
+.frac-mp-num {
+  font-size: 0.65em;
+  align-self: flex-start;
+  padding-top: 0.3em;
+  min-width: 1.8em;
+  color: var(--muted);
+}
+
+.frac-expr {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Stacked fraction: numerator over horizontal line over denominator */
+.frac-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.frac-n {
+  border-bottom: 1.5px solid currentColor;
+  padding: 0 0.3em 0.1em;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.frac-d {
+  padding: 0.1em 0.3em 0;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+/* Mixed number: whole number beside stacked fraction */
+.frac-mixed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.frac-op,
+.frac-eq {
+  line-height: 1;
+}
+
+/* Answer box — taller than the regular box to allow writing a fraction */
+.frac-answer-box {
+  display: inline-block;
+  min-width: 3.5rem;
+  height: 4rem;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  border-radius: 3px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Font size scales with column count */
+.fraction-problems-grid.frac-cols-1 .frac-problem { font-size: 1.7rem; }
+.fraction-problems-grid.frac-cols-2 .frac-problem { font-size: 1.5rem; }
+.fraction-problems-grid.frac-cols-3 .frac-problem { font-size: 1.3rem; }
+.fraction-problems-grid.frac-cols-4 .frac-problem { font-size: 1.1rem; }
+
 /* Answer key checkbox label */
 .answer-key-label {
   display: flex;
@@ -2117,5 +2200,29 @@ body {
     display: block;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  /* Fractions worksheet print */
+  .fraction-problems-grid {
+    gap: 0.3in 0.2in;
+  }
+
+  .fraction-problems-grid .frac-problem {
+    font-size: 13pt;
+  }
+
+  .frac-n {
+    border-bottom: 1pt solid #000;
+  }
+
+  .frac-answer-box {
+    height: 0.5in;
+    min-width: 0.7in;
+    border: 1pt solid #bbb;
+    border-radius: 2pt;
+  }
+
+  .frac-answer-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
