@@ -720,6 +720,116 @@ body {
 }
 
 /* ============================================================
+   CRYPTOGRAM
+   ============================================================ */
+.cryptogram-instruction {
+  font-size: 0.88rem;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.cryptogram-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.crypto-word {
+  display: flex;
+  gap: 3px;
+}
+
+.crypto-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 26px;
+}
+
+.crypto-encoded {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.crypto-decoded {
+  width: 100%;
+  border-bottom: 1.5px solid var(--text);
+  height: 1.6em;
+  line-height: 1.6;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.crypto-decoded.hint  { color: var(--primary); }
+.crypto-decoded.answer { color: var(--primary); }
+
+/* Letter key reference */
+.cryptogram-key-section {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.cryptogram-key-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.cryptogram-key-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.cryptogram-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+}
+
+.crypto-key-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 26px;
+}
+
+.crypto-key-cipher {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.crypto-key-plain {
+  width: 100%;
+  border-bottom: 1.5px solid var(--text);
+  height: 1.5em;
+  line-height: 1.5;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.crypto-key-plain.hint   { color: var(--primary); }
+.crypto-key-plain.answer { color: var(--primary); }
+
+.cryptogram-answer-key {
+  display: none;
+}
+
+/* ============================================================
    LANGUAGE WORKSHEETS
    ============================================================ */
 
@@ -2364,5 +2474,74 @@ body {
 
   .np-answer-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Cryptogram print */
+  .cryptogram-answer-key.show-on-print {
+    display: block;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .cryptogram-instruction {
+    font-size: 9pt;
+    margin-bottom: 0.2in;
+  }
+
+  .cryptogram-body {
+    gap: 0.15in 0.22in;
+    margin-bottom: 0.3in;
+  }
+
+  .crypto-word { gap: 2px; }
+
+  .crypto-cell { width: 0.25in; }
+
+  .crypto-encoded {
+    font-size: 7pt;
+    line-height: 1.2;
+  }
+
+  .crypto-decoded {
+    height: 0.22in;
+    line-height: 0.22in;
+    font-size: 9pt;
+    border-bottom: 1pt solid #000;
+  }
+
+  .crypto-decoded.answer,
+  .crypto-decoded.hint {
+    color: #2f4ac2 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cryptogram-key-section {
+    margin-top: 0.2in;
+    padding-top: 0.15in;
+    border-top: 0.5pt solid #aaa;
+  }
+
+  .cryptogram-key-title { font-size: 7.5pt; margin-bottom: 0.06in; }
+  .cryptogram-key-note  { font-size: 7pt;   margin-bottom: 0.1in; }
+
+  .cryptogram-key { gap: 4pt 3pt; }
+
+  .crypto-key-cell { width: 0.24in; }
+
+  .crypto-key-cipher { font-size: 6.5pt; line-height: 1.2; }
+
+  .crypto-key-plain {
+    height: 0.19in;
+    line-height: 0.19in;
+    font-size: 8pt;
+    border-bottom: 1pt solid #000;
+  }
+
+  .crypto-key-plain.answer,
+  .crypto-key-plain.hint {
+    color: #2f4ac2 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
