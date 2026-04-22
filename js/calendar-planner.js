@@ -138,13 +138,21 @@ const now = new Date();
 document.getElementById('cal-month').value = now.getMonth();
 document.getElementById('cal-year').value = now.getFullYear();
 
-document.getElementById('generate-btn').addEventListener('click', generate);
-document.getElementById('landscape-print').addEventListener('change', (e) => {
-  const outputEl = document.getElementById('output');
-  if (e.target.checked) {
-    outputEl.classList.add('landscape-print');
-  } else {
-    outputEl.classList.remove('landscape-print');
+let landscapeStyleTag = null;
+
+function updateLandscapeStyle() {
+  const isLandscape = document.getElementById('landscape-print').checked;
+
+  if (isLandscape && !landscapeStyleTag) {
+    landscapeStyleTag = document.createElement('style');
+    landscapeStyleTag.textContent = `@media print { @page { size: letter landscape; margin: 0.5in; } }`;
+    document.head.appendChild(landscapeStyleTag);
+  } else if (!isLandscape && landscapeStyleTag) {
+    landscapeStyleTag.remove();
+    landscapeStyleTag = null;
   }
-});
+}
+
+document.getElementById('generate-btn').addEventListener('click', generate);
+document.getElementById('landscape-print').addEventListener('change', updateLandscapeStyle);
 document.getElementById('print-btn').addEventListener('click', () => window.print());

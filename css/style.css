@@ -2265,15 +2265,6 @@ body {
     margin: 0.5in;
   }
 
-  @page landscape-page {
-    size: letter landscape;
-    margin: 0.5in;
-  }
-
-  .landscape-print {
-    page: landscape-page;
-  }
-
   .no-print {
     display: none !important;
   }
