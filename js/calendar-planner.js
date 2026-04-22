@@ -139,5 +139,4 @@ document.getElementById('cal-month').value = now.getMonth();
 document.getElementById('cal-year').value = now.getFullYear();
 
 document.getElementById('generate-btn').addEventListener('click', generate);
-document.getElementById('regen-btn').addEventListener('click', generate);
 document.getElementById('print-btn').addEventListener('click', () => window.print());
