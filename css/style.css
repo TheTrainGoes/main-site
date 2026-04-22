@@ -1935,6 +1935,119 @@ body {
 }
 
 /* ============================================================
+   CROSSWORD
+   ============================================================ */
+.cw-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.cw-grid-wrapper {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.cw-grid {
+  display: inline-grid;
+  border: 2px solid #222;
+  line-height: 0;
+}
+
+.cw-cell {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  border: 1px solid #444;
+  background: #111;
+  box-sizing: border-box;
+}
+
+.cw-cell.cw-white {
+  background: #fff;
+}
+
+.cw-cell-num {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  pointer-events: none;
+}
+
+.cw-cell-letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary);
+  pointer-events: none;
+}
+
+.cw-clues {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+}
+
+.cw-clues-heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cw-clue-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cw-clue-item {
+  font-size: 0.84rem;
+  line-height: 1.4;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.cw-clue-num {
+  font-weight: 700;
+  flex-shrink: 0;
+  min-width: 1.5rem;
+  color: var(--muted);
+}
+
+.cw-clue-text {
+  color: var(--text);
+}
+
+.cw-clue-answer {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.cw-answer-key {
+  display: none;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {
@@ -2540,6 +2653,93 @@ body {
 
   .crypto-key-plain.answer,
   .crypto-key-plain.hint {
+    color: #2f4ac2 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Crossword print */
+  .cw-answer-key.show-on-print {
+    display: block;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .cw-grid-wrapper {
+    overflow: visible;
+    display: block;
+    margin-bottom: 0.2in;
+  }
+
+  .cw-grid {
+    display: inline-grid !important;
+    margin: 0 auto;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cw-grid[data-size="11"] {
+    grid-template-columns: repeat(11, 0.5in) !important;
+    width: 5.5in;
+  }
+
+  .cw-grid[data-size="13"] {
+    grid-template-columns: repeat(13, 0.46in) !important;
+    width: 5.98in;
+  }
+
+  .cw-grid[data-size="15"] {
+    grid-template-columns: repeat(15, 0.42in) !important;
+    width: 6.3in;
+  }
+
+  .cw-cell {
+    width: auto !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    background: #111 !important;
+    border: 0.75pt solid #444;
+  }
+
+  .cw-cell.cw-white {
+    background: #fff !important;
+  }
+
+  .cw-cell-num {
+    font-size: 5.5pt;
+  }
+
+  .cw-cell-letter {
+    font-size: 10pt;
+    color: #2f4ac2 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cw-layout {
+    gap: 0.15in;
+  }
+
+  .cw-clues {
+    gap: 0.08in 0.3in;
+  }
+
+  .cw-clues-heading {
+    font-size: 7.5pt;
+    margin-bottom: 0.05in;
+    padding-bottom: 0.04in;
+    border-bottom: 0.5pt solid #aaa;
+  }
+
+  .cw-clue-list {
+    gap: 0.04in;
+  }
+
+  .cw-clue-item {
+    font-size: 8.5pt;
+  }
+
+  .cw-clue-answer {
     color: #2f4ac2 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
