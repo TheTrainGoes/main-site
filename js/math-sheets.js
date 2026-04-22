@@ -17,19 +17,20 @@ const VALID_GRADES = {
   subtraction:    ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6'],
   multiplication: ['grade2','grade3','grade4','grade5','grade6'],
   division:       ['grade3','grade4','grade5','grade6'],
-  money:          ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6']
+  money:          ['easy','medium','hard']
 };
 
 // Default selected grade per operation
 const DEFAULT_GRADE = {
   addition: 'grade2', subtraction: 'grade2', multiplication: 'grade3', division: 'grade3',
-  money: 'grade2'
+  money: 'easy'
 };
 
 const GRADE_LABELS = {
   kindergarten: 'Kindergarten',
   grade1: 'Grade 1', grade2: 'Grade 2', grade3: 'Grade 3',
-  grade4: 'Grade 4', grade5: 'Grade 5', grade6: 'Grade 6'
+  grade4: 'Grade 4', grade5: 'Grade 5', grade6: 'Grade 6',
+  easy: 'Easy', medium: 'Medium', hard: 'Hard'
 };
 
 const ALL_GRADES = ['kindergarten','grade1','grade2','grade3','grade4','grade5','grade6'];
@@ -96,14 +97,15 @@ function makeProblem(grade) {
       break;
 
     case 'money': {
-      // Kindergarten: pennies, nickels, dimes only (3–6 pieces)
-      // Grade 1+: all denominations, count increases by 1 each grade (5, 6, 7, 8, 9, 10)
-      const K_POOL = [
-        { label: '1\u00a2',  value: 1   },
-        { label: '5\u00a2',  value: 5   },
-        { label: '10\u00a2', value: 10  }
+      // Easy:   1¢, 5¢, 10¢ only (3–5 pieces)
+      // Medium: all coins + $5, $10 (5–7 pieces)
+      // Hard:   all coins and bills (6–10 pieces)
+      const EASY_POOL = [
+        { label: '1\u00a2',  value: 1  },
+        { label: '5\u00a2',  value: 5  },
+        { label: '10\u00a2', value: 10 }
       ];
-      const G1_POOL = [
+      const MEDIUM_POOL = [
         { label: '1\u00a2',  value: 1   },
         { label: '5\u00a2',  value: 5   },
         { label: '10\u00a2', value: 10  },
@@ -112,17 +114,18 @@ function makeProblem(grade) {
         { label: '$5',        value: 500 },
         { label: '$10',       value: 1000}
       ];
-      const FULL_POOL = [
-        ...G1_POOL,
+      const HARD_POOL = [
+        ...MEDIUM_POOL,
         { label: '$20',  value: 2000  },
         { label: '$50',  value: 5000  },
         { label: '$100', value: 10000 }
       ];
-      const pool = grade === 'kindergarten' ? K_POOL
-                 : grade === 'grade1'       ? G1_POOL
-                 :                           FULL_POOL;
-      const count = { kindergarten: rand(3, 6), grade1: 5, grade2: 6,
-                      grade3: 7, grade4: 8, grade5: 9, grade6: 10 }[grade] || 5;
+      const pool  = grade === 'easy'   ? EASY_POOL
+                  : grade === 'medium' ? MEDIUM_POOL
+                  :                      HARD_POOL;
+      const count = grade === 'easy'   ? rand(3, 5)
+                  : grade === 'medium' ? rand(5, 7)
+                  :                      rand(6, 10);
       const items = [];
       for (let i = 0; i < count; i++) {
         items.push(pool[rand(0, pool.length - 1)]);
