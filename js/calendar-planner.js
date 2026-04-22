@@ -139,4 +139,12 @@ document.getElementById('cal-month').value = now.getMonth();
 document.getElementById('cal-year').value = now.getFullYear();
 
 document.getElementById('generate-btn').addEventListener('click', generate);
+document.getElementById('landscape-print').addEventListener('change', (e) => {
+  const outputEl = document.getElementById('output');
+  if (e.target.checked) {
+    outputEl.classList.add('landscape-print');
+  } else {
+    outputEl.classList.remove('landscape-print');
+  }
+});
 document.getElementById('print-btn').addEventListener('click', () => window.print());
