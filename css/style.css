@@ -1812,8 +1812,11 @@ body {
 }
 
 .np-blank {
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  display: inline-block;
+  width: 2.75rem;
+  border-bottom: 2px solid var(--text);
+  vertical-align: bottom;
+  margin-bottom: 1px;
 }
 
 .np-rule {
@@ -2361,6 +2364,11 @@ body {
   }
 
   .np-num { font-size: 9pt; }
+
+  .np-blank {
+    width: 0.75in;
+    border-bottom: 1pt solid #000;
+  }
 
   .np-answer-grid {
     grid-template-columns: repeat(4, 1fr);
