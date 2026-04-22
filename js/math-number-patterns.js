@@ -92,7 +92,7 @@ function buildProblemEl(idx, p, difficulty) {
     if (p.blanks.includes(i)) {
       const blank = document.createElement('span');
       blank.className = 'np-blank';
-
+      blank.textContent = '______';
       seq.appendChild(blank);
     } else {
       const el = document.createElement('span');
