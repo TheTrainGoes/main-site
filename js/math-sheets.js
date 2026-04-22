@@ -239,8 +239,7 @@ function populateGrades() {
   const valid = VALID_GRADES[OPERATION];
   const def   = DEFAULT_GRADE[OPERATION];
   gradeEl.innerHTML = '';
-  ALL_GRADES.forEach(g => {
-    if (!valid.includes(g)) return;
+  valid.forEach(g => {
     const opt = document.createElement('option');
     opt.value = g;
     opt.textContent = GRADE_LABELS[g];
